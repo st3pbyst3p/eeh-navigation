@@ -356,7 +356,6 @@
                 searchInputSubmit: "=",
                 sidebarCollapsedButtonIsVisible: "=?",
                 sidebarIsCollapsed: "=?",
-                sidebarCollapse: "=?",
                 refresh: "=?"
             },
             link: function(scope) {
@@ -377,7 +376,6 @@
                     scope.sidebarCollapsedButtonIsVisible = true;
                 }
                 scope.sidebarIsCollapsed = scope.sidebarIsCollapsed || false;
-                scope.sidebarCollapse = scope.sidebarCollapse || true;
                 if (scope.searchInputIsVisible !== false) {
                     scope.searchInputIsVisible = true;
                 }
@@ -395,6 +393,9 @@
                 windowElement.bind("resize", function() {
                     scope.$apply();
                 });
+                scope.checkButtonState = function() {
+                    return buttonState.btnState();
+                };
                 var getWindowDimensions = function() {
                     return {
                         innerHeight: windowElement[0].innerHeight,
@@ -460,14 +461,6 @@
                         return item._isVisible();
                     }).length > 0;
                 };
-                var checkButtonState = function() {
-                    return buttonState.btnState();
-                };
-                scope.$watch(checkButtonState, function() {
-                    if (checkButtonState() !== scope.sidebarCollapse) {
-                        scope.sidebarCollapse = buttonState.btnState();
-                    }
-                }, true);
                 scope.topLevelMenuItemClickHandler = function(clickedMenuItem) {
                     if (!scope.sidebarIsCollapsed || !clickedMenuItem.hasChildren()) {
                         return;

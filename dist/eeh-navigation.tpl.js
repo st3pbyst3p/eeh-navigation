@@ -195,7 +195,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
 
   $templateCache.put('template/eeh-navigation/sidebar/eeh-navigation-sidebar.html',
     "<nav class=\"navbar navbar-collapse navbar-default eeh-navigation eeh-navigation-sidebar\" role=\"navigation\"\n" +
-    "    ng-class=\"navClass\" uib-collapse=\"sidebarCollapse\">\n" +
+    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState()\">\n" +
     "    <!-- is set to collapse the parent container -->\n" +
     "    <div class=\"navbar-collapse\" >\n" +
     "        <ul class=\"nav sidebar-nav\">\n" +
