@@ -55,7 +55,6 @@ function SidebarDirective($window, eehNavigation, buttonState) {
             searchInputSubmit: '=',
             sidebarCollapsedButtonIsVisible: '=?',
             sidebarIsCollapsed: '=?',
-            sidebarCollapse: '=?', // hide sidebar parameter
             refresh: '=?'
         },
         link: function (scope) {
@@ -76,7 +75,6 @@ function SidebarDirective($window, eehNavigation, buttonState) {
                 scope.sidebarCollapsedButtonIsVisible = true;
             }
             scope.sidebarIsCollapsed = scope.sidebarIsCollapsed || false;
-            scope.sidebarCollapse = scope.sidebarCollapse || true; // visibility toggle value
             if (scope.searchInputIsVisible !== false) {
                 scope.searchInputIsVisible = true;
             }
@@ -96,6 +94,11 @@ function SidebarDirective($window, eehNavigation, buttonState) {
             windowElement.bind('resize', function () {
                 scope.$apply();
             });
+
+            //checker that handles the changes
+            scope.checkButtonState = function() {
+                return buttonState.btnState();
+            };
 
             var getWindowDimensions = function () {
                 return {
@@ -176,16 +179,6 @@ function SidebarDirective($window, eehNavigation, buttonState) {
                     })
                         .length > 0);
             };
-
-            //checker that handles the changes
-            var checkButtonState = function() {
-                return buttonState.btnState();
-            };
-            scope.$watch(checkButtonState, function(){
-                if(checkButtonState()!==scope.sidebarCollapse){
-                    scope.sidebarCollapse = buttonState.btnState();
-                }
-            }, true);
 
 
             scope.topLevelMenuItemClickHandler = function (clickedMenuItem) {
