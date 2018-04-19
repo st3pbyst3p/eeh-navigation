@@ -1,5 +1,5 @@
 'use strict';
-angular.module('eehNavigation').directive('eehNavigationSidebar', SidebarDirective);
+angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'eehNavigation', 'buttonState', SidebarDirective]);
 
 /**
  * @ngInject
@@ -37,7 +37,7 @@ angular.module('eehNavigation').directive('eehNavigationSidebar', SidebarDirecti
  * @param {function=} refresh
  * This attribute provides a function for refreshing the directive.
  */
-function SidebarDirective($window, eehNavigation) {
+function SidebarDirective($window, eehNavigation, buttonState) {
     return {
         restrict: 'AE',
         transclude: true,
@@ -55,6 +55,7 @@ function SidebarDirective($window, eehNavigation) {
             searchInputSubmit: '=',
             sidebarCollapsedButtonIsVisible: '=?',
             sidebarIsCollapsed: '=?',
+            sidebarCollapse: '=?', // hide sidebar parameter
             refresh: '=?'
         },
         link: function (scope) {
@@ -75,6 +76,7 @@ function SidebarDirective($window, eehNavigation) {
                 scope.sidebarCollapsedButtonIsVisible = true;
             }
             scope.sidebarIsCollapsed = scope.sidebarIsCollapsed || false;
+            scope.sidebarCollapse = scope.sidebarCollapse || true; // visibility toggle value
             if (scope.searchInputIsVisible !== false) {
                 scope.searchInputIsVisible = true;
             }
@@ -82,6 +84,7 @@ function SidebarDirective($window, eehNavigation) {
             var menuItems = function () {
                 return eehNavigation.menuItems();
             };
+
             scope.refresh = function () {
                 if (angular.isUndefined(scope.menuName)) {
                     return;
@@ -120,6 +123,7 @@ function SidebarDirective($window, eehNavigation) {
                 scope.sidebarIsCollapsed = !scope.sidebarIsCollapsed;
                 setTextCollapseState();
             };
+
             function setTextCollapseState() {
                 var sidebarMenuItems = angular.element(document.querySelectorAll('ul.sidebar-nav:not(.sidebar-nav-nested) > li > a > span'));
                 var sidebarMenuItemText = sidebarMenuItems.find('span');
@@ -154,6 +158,7 @@ function SidebarDirective($window, eehNavigation) {
                 }
             }
 
+
             /**
              * $includeContentLoaded is emitted when ng-include templates are finished loading.
              * The text collapse state needs to be evaluated after the sidebar menu templates (which are loaded via
@@ -171,6 +176,17 @@ function SidebarDirective($window, eehNavigation) {
                     })
                         .length > 0);
             };
+
+            //checker that handles the changes
+            var checkButtonState = function() {
+                return buttonState.btnState();
+            };
+            scope.$watch(checkButtonState, function(){
+                if(checkButtonState()!==scope.sidebarCollapse){
+                    scope.sidebarCollapse = buttonState.btnState();
+                }
+            }, true);
+
 
             scope.topLevelMenuItemClickHandler = function (clickedMenuItem) {
                 if (!scope.sidebarIsCollapsed || !clickedMenuItem.hasChildren()) {

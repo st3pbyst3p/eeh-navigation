@@ -4,7 +4,7 @@
     MenuItemContentDirective.$inject = [ "eehNavigation" ];
     MenuDirective.$inject = [ "eehNavigation" ];
     SearchInputDirective.$inject = [ "eehNavigation" ];
-    SidebarDirective.$inject = [ "$window", "eehNavigation" ];
+    SidebarDirective.$inject = [ "$window", "eehNavigation", "buttonState" ];
     angular.module("eehNavigation", [ "pascalprecht.translate" ]);
     "use strict";
     angular.module("eehNavigation").directive("eehNavigationActiveMenuItem", ActiveMenuItemDirective);
@@ -39,6 +39,18 @@
             }
         };
     }
+    angular.module("eehNavigation").factory("buttonState", function() {
+        var btnStateVar = true;
+        return {
+            changeState: function() {
+                btnStateVar = !btnStateVar;
+                return btnStateVar;
+            },
+            btnState: function() {
+                return btnStateVar;
+            }
+        };
+    });
     "use strict";
     var MenuItem = function(config) {
         this.weight = 0;
@@ -232,7 +244,7 @@
         };
     }
     "use strict";
-    var NavbarDirective = function($window, eehNavigation) {
+    var NavbarDirective = function($window, eehNavigation, buttonState) {
         return {
             restrict: "AE",
             templateUrl: "template/eeh-navigation/navbar/eeh-navigation-navbar.html",
@@ -286,10 +298,13 @@
                         scope.isNavbarCollapsed = true;
                     }
                 }, true);
+                scope.toggleState = function() {
+                    if (buttonState) scope.isNavbarCollapsed = buttonState.changeState();
+                };
             }
         };
     };
-    angular.module("eehNavigation").directive("eehNavigationNavbar", [ "$window", "eehNavigation", NavbarDirective ]);
+    angular.module("eehNavigation").directive("eehNavigationNavbar", [ "$window", "eehNavigation", "buttonState", NavbarDirective ]);
     "use strict";
     angular.module("eehNavigation").directive("eehNavigationSearchInput", SearchInputDirective);
     function SearchInputDirective(eehNavigation) {
@@ -322,8 +337,8 @@
         };
     }
     "use strict";
-    angular.module("eehNavigation").directive("eehNavigationSidebar", SidebarDirective);
-    function SidebarDirective($window, eehNavigation) {
+    angular.module("eehNavigation").directive("eehNavigationSidebar", [ "$window", "eehNavigation", "buttonState", SidebarDirective ]);
+    function SidebarDirective($window, eehNavigation, buttonState) {
         return {
             restrict: "AE",
             transclude: true,
@@ -341,6 +356,7 @@
                 searchInputSubmit: "=",
                 sidebarCollapsedButtonIsVisible: "=?",
                 sidebarIsCollapsed: "=?",
+                sidebarCollapse: "=?",
                 refresh: "=?"
             },
             link: function(scope) {
@@ -361,6 +377,7 @@
                     scope.sidebarCollapsedButtonIsVisible = true;
                 }
                 scope.sidebarIsCollapsed = scope.sidebarIsCollapsed || false;
+                scope.sidebarCollapse = scope.sidebarCollapse || true;
                 if (scope.searchInputIsVisible !== false) {
                     scope.searchInputIsVisible = true;
                 }
@@ -443,6 +460,14 @@
                         return item._isVisible();
                     }).length > 0;
                 };
+                var checkButtonState = function() {
+                    return buttonState.btnState();
+                };
+                scope.$watch(checkButtonState, function() {
+                    if (checkButtonState() !== scope.sidebarCollapse) {
+                        scope.sidebarCollapse = buttonState.btnState();
+                    }
+                }, true);
                 scope.topLevelMenuItemClickHandler = function(clickedMenuItem) {
                     if (!scope.sidebarIsCollapsed || !clickedMenuItem.hasChildren()) {
                         return;
