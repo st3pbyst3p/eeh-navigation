@@ -39,6 +39,7 @@
             }
         };
     }
+    "use strict";
     angular.module("eehNavigation").factory("buttonState", function() {
         var btnStateVar = true;
         return {

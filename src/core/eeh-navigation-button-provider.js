@@ -1,3 +1,4 @@
+'use strict';
 angular.module('eehNavigation').factory('buttonState', function(){
     
           var btnStateVar = true; //initial - true for hidden
