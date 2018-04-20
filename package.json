@@ -22,6 +22,7 @@
     "canonical-path": "0.0.2",
     "dgeni": "^0.4.2",
     "dgeni-packages": "^0.17.1",
+    "eslint-config-google": "^0.9.1",
     "grunt": ">=0.4.5 <=1.0.1",
     "grunt-angular-templates": "^1.1.0",
     "grunt-cli": "^1.2.0",
