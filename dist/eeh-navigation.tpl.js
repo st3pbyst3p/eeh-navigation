@@ -88,7 +88,8 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "     role=\"navigation\">\n" +
     "    <div ng-class=\"containerClass\">\n" +
     "        <div class=\"navbar-header\">\n" +
-    "            <button type=\"button\" class=\"navbar-toggle\" ng-click=\"toggleState()\"> <!-- changed the ng-click to a toggle state function -->\n" +
+    "            <button type=\"button\" class=\"navbar-toggle\" ng-click=\"toggleState()\">\n" +
+    "                <!-- changed the ng-click to a toggle state function -->\n" +
     "                <span class=\"sr-only\">Toggle navigation</span>\n" +
     "                <span class=\"icon-bar\"></span>\n" +
     "                <span class=\"icon-bar\"></span>\n" +
@@ -195,7 +196,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
 
   $templateCache.put('template/eeh-navigation/sidebar/eeh-navigation-sidebar.html',
     "<nav class=\"navbar navbar-collapse navbar-default eeh-navigation eeh-navigation-sidebar\" role=\"navigation\"\n" +
-    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState()\">\n" +
+    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState\">\n" +
     "    <!-- is set to collapse the parent container -->\n" +
     "    <div class=\"navbar-collapse\" >\n" +
     "        <ul class=\"nav sidebar-nav\">\n" +
