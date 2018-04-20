@@ -1,5 +1,5 @@
 'use strict';
-angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'eehNavigation', 'buttonState', SidebarDirective]);
+angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'eehNavigation', SidebarDirective]);
 
 /**
  * @ngInject
@@ -37,7 +37,7 @@ angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'e
  * @param {function=} refresh
  * This attribute provides a function for refreshing the directive.
  */
-function SidebarDirective($window, eehNavigation, buttonState) {
+function SidebarDirective($window, eehNavigation) {
     return {
         restrict: 'AE',
         transclude: true,
@@ -96,8 +96,11 @@ function SidebarDirective($window, eehNavigation, buttonState) {
             });
 
             //checker that handles the changes
-            scope.checkButtonState = function() {
-                return buttonState.btnState();
+            scope.checkButtonState = true; //initializarea
+            scope.$on('menuCollapseStatus', listenCollapse);
+
+            function listenCollapse($event, message){
+                scope.checkButtonState = message;
             };
 
             var getWindowDimensions = function () {

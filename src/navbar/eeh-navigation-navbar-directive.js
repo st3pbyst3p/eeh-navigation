@@ -22,7 +22,7 @@
  * @param {function=} brandClick Sets the callback function of the brand element.
  * @param {function=} refresh A function for refreshing the directive.
  */
-var NavbarDirective = function ($window, eehNavigation, buttonState) {
+var NavbarDirective = function ($window, $rootScope, eehNavigation) {
     return {
         restrict: 'AE',
         templateUrl: 'template/eeh-navigation/navbar/eeh-navigation-navbar.html',
@@ -75,13 +75,20 @@ var NavbarDirective = function ($window, eehNavigation, buttonState) {
                     scope.isNavbarCollapsed = true;
                 }
             }, true);
-
-            //change the menu elements visibility in mobile version
+            
+            //change the menu elements visibility in mobile version by emitting an event
             scope.toggleState = function(){
-                if(buttonState)scope.isNavbarCollapsed = buttonState.changeState();
+                $rootScope.$broadcast('menuCollapseStatus', !scope.isNavbarCollapsed);
+            };
+
+            // listens to the state of the emitted event
+            scope.$on('menuCollapseStatus', listenCollapse);
+            function listenCollapse($event, message){
+                scope.isNavbarCollapsed = message;
             };
         }
     };
 };
 
-angular.module('eehNavigation').directive('eehNavigationNavbar', ['$window', 'eehNavigation', 'buttonState', NavbarDirective]);
+angular.module('eehNavigation').directive('eehNavigationNavbar', ['$window', '$rootScope', 'eehNavigation', NavbarDirective]);
+
