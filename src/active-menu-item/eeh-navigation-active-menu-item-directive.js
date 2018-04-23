@@ -4,7 +4,8 @@ angular.module('eehNavigation').directive('eehNavigationActiveMenuItem', ActiveM
 function isMenuItemActive(menuItem, $state) {
     if (!menuItem.hasChildren()) {
         // Return whether or not the leaf is active.
-        return angular.isDefined(menuItem.state) && $state.includes(menuItem.state);
+        // return angular.isDefined(menuItem.state) && $state.includes(menuItem.state);
+        return false;
     }
     var children = menuItem.children();
     for (var i = 0; i < children.length; i++) {
