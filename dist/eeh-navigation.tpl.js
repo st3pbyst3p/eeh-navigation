@@ -236,7 +236,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </p>\n" +
     "    <span ng-if=\"item.ngInclude\" ng-include=\"item.ngInclude\"></span>\n" +
-    "    <a ng-if=\"item.state\" ui-sref=\"{{item.state}}\">\n" +
+    "    <a ng-if=\"item.state\" ui-sref=\"{{item.state}}\"  ui-sref-opts=\"{inherit: false}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
     "    <a ng-if=\"item.click\" ng-click=\"item.click()\">\n" +

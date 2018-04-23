@@ -10,7 +10,7 @@
     angular.module("eehNavigation").directive("eehNavigationActiveMenuItem", ActiveMenuItemDirective);
     function isMenuItemActive(menuItem, $state) {
         if (!menuItem.hasChildren()) {
-            return angular.isDefined(menuItem.state) && $state.includes(menuItem.state);
+            return false;
         }
         var children = menuItem.children();
         for (var i = 0; i < children.length; i++) {
@@ -364,6 +364,7 @@
                 scope.sidebarCollapsedIconClass = scope.sidebarCollapsedIconClass || scope.defaultIconClassPrefix() + "-arrow-right";
                 scope.sidebarExpandedIconClass = scope.sidebarExpandedIconClass || scope.defaultIconClassPrefix() + "-arrow-left";
                 scope.searchInputIconClass = scope.searchInputIconClass || scope.defaultIconClassPrefix() + "-search";
+                scope.sidebarIsHidden = false;
                 if (scope.sidebarCollapsedButtonIsVisible !== false) {
                     scope.sidebarCollapsedButtonIsVisible = true;
                 }
