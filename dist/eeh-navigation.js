@@ -364,7 +364,6 @@
                 scope.sidebarCollapsedIconClass = scope.sidebarCollapsedIconClass || scope.defaultIconClassPrefix() + "-arrow-right";
                 scope.sidebarExpandedIconClass = scope.sidebarExpandedIconClass || scope.defaultIconClassPrefix() + "-arrow-left";
                 scope.searchInputIconClass = scope.searchInputIconClass || scope.defaultIconClassPrefix() + "-search";
-                scope.sidebarIsHidden = false;
                 if (scope.sidebarCollapsedButtonIsVisible !== false) {
                     scope.sidebarCollapsedButtonIsVisible = true;
                 }
