@@ -39,7 +39,7 @@
         <span eeh-navigation-menu-item-content="item"></span>
     </p>
     <span ng-if="item.ngInclude" ng-include="item.ngInclude"></span>
-    <a ng-if="item.state" ui-sref="{{item.state}}">
+    <a ng-if="item.state" ui-sref="{{item.state}}"  ui-sref-opts="{inherit: false}">
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
     <a ng-if="item.click" ng-click="item.click()">
