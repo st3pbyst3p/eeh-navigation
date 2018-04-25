@@ -8,8 +8,8 @@
 
   > .navbar-collapse {
     // both values were 0
-    padding-right: 15px; 
-    padding-left: 15px;
+    padding-right: -15px; 
+    padding-left: -15px;
 
     > ul.sidebar-nav {
       /* Indent second level menu items */
