@@ -8,18 +8,18 @@
   border-right: none;
   border-left: none;
 }
-.eeh-navigation-sidebar > .navbar-collapse {
+.eeh-navigation-sidebar > .nav-collapse {
   padding-right: 0;
   padding-left: 0;
 }
-.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav {
+.eeh-navigation-sidebar > .nav-collapse > ul.sidebar-nav {
   /* Indent second level menu items */
   /* Indent third level menu items */
 }
-.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > a {
+.eeh-navigation-sidebar > .nav-collapse > ul.sidebar-nav > li > ul > li > a {
   padding-left: 30px;
 }
-.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > ul > li > a {
+.eeh-navigation-sidebar > .nav-collapse > ul.sidebar-nav > li > ul > li > ul > li > a {
   padding-left: 45px;
 }
 .eeh-navigation-sidebar .navbar-default > .active {
