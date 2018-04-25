@@ -8,6 +8,10 @@
   border-right: none;
   border-left: none;
 }
+.eeh-navigation-sidebar > .navbar-collapse {
+  padding-right: 0;
+  padding-left: 0;
+}
 .eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav {
   /* Indent second level menu items */
   /* Indent third level menu items */
