@@ -2,24 +2,29 @@
   margin-right: 0;
 }
 
+.eeh-padding {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .eeh-navigation-sidebar {
   border-radius: 0;
   border-top: none;
   border-right: none;
   border-left: none;
 }
-.eeh-navigation-sidebar > .nav-collapse {
+.eeh-navigation-sidebar > .navbar-collapse {
   padding-right: 0;
   padding-left: 0;
 }
-.eeh-navigation-sidebar > .nav-collapse > ul.sidebar-nav {
+.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav {
   /* Indent second level menu items */
   /* Indent third level menu items */
 }
-.eeh-navigation-sidebar > .nav-collapse > ul.sidebar-nav > li > ul > li > a {
+.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > a {
   padding-left: 30px;
 }
-.eeh-navigation-sidebar > .nav-collapse > ul.sidebar-nav > li > ul > li > ul > li > a {
+.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > ul > li > a {
   padding-left: 45px;
 }
 .eeh-navigation-sidebar .navbar-default > .active {
