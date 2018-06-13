@@ -1,5 +1,6 @@
 'use strict';
-angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'eehNavigation', SidebarDirective]);
+// +injected: $filter
+angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'eehNavigation', '$filter', SidebarDirective]);
 
 /**
  * @ngInject
@@ -37,7 +38,9 @@ angular.module('eehNavigation').directive('eehNavigationSidebar', ['$window', 'e
  * @param {function=} refresh
  * This attribute provides a function for refreshing the directive.
  */
-function SidebarDirective($window, eehNavigation) {
+
+// +injected: $filter
+function SidebarDirective($window, eehNavigation, $filter) {
     return {
         restrict: 'AE',
         transclude: true,
@@ -58,6 +61,15 @@ function SidebarDirective($window, eehNavigation) {
             refresh: '=?'
         },
         link: function (scope) {
+
+            // Alt App fixes ---------------------------------------------------------------------------
+            // changes the title of page, based on current pressed item
+            scope.changeTitle = function(elem){
+                document.title = $filter("translate")(elem.text);
+            };
+
+            // -----------------------------------------------------------------------------------------
+
             scope.iconBaseClass = function () {
                 return eehNavigation.iconBaseClass();
             };

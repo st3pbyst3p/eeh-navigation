@@ -257,6 +257,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "        <li ng-repeat=\"item in item.children() | orderBy:'weight'\"\n" +
     "            ng-attr-id=\"{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}\"\n" +
     "            ng-include=\"'template/eeh-navigation/sidebar-menu-item.html'\"\n" +
+    "            ng-click=\"changeTitle(item)\"\n" +
     "            ng-class=\"{ 'leaf': !item.hasChildren() }\"\n" +
     "            ng-if=\"item._isVisible()\"\n" +
     "            ui-sref-active-eq=\"active\"\n" +

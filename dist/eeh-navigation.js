@@ -4,7 +4,7 @@
     MenuItemContentDirective.$inject = [ "eehNavigation" ];
     MenuDirective.$inject = [ "eehNavigation" ];
     SearchInputDirective.$inject = [ "eehNavigation" ];
-    SidebarDirective.$inject = [ "$window", "eehNavigation" ];
+    SidebarDirective.$inject = [ "$window", "eehNavigation", "$filter" ];
     angular.module("eehNavigation", [ "pascalprecht.translate" ]);
     "use strict";
     angular.module("eehNavigation").directive("eehNavigationActiveMenuItem", ActiveMenuItemDirective);
@@ -329,8 +329,8 @@
         };
     }
     "use strict";
-    angular.module("eehNavigation").directive("eehNavigationSidebar", [ "$window", "eehNavigation", SidebarDirective ]);
-    function SidebarDirective($window, eehNavigation) {
+    angular.module("eehNavigation").directive("eehNavigationSidebar", [ "$window", "eehNavigation", "$filter", SidebarDirective ]);
+    function SidebarDirective($window, eehNavigation, $filter) {
         return {
             restrict: "AE",
             transclude: true,
@@ -351,6 +351,9 @@
                 refresh: "=?"
             },
             link: function(scope) {
+                scope.changeTitle = function(elem) {
+                    document.title = $filter("translate")(elem.text);
+                };
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
                 };

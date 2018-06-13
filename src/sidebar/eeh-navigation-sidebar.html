@@ -60,6 +60,7 @@
         <li ng-repeat="item in item.children() | orderBy:'weight'"
             ng-attr-id="{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}"
             ng-include="'template/eeh-navigation/sidebar-menu-item.html'"
+            ng-click="changeTitle(item)"
             ng-class="{ 'leaf': !item.hasChildren() }"
             ng-if="item._isVisible()"
             ui-sref-active-eq="active"
