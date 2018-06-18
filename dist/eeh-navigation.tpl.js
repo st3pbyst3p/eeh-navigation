@@ -206,6 +206,12 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                                             submit=\"searchInputSubmit\"\n" +
     "                                             is-collapsed=\"sidebarIsCollapsed\"></eeh-navigation-search-input>\n" +
     "            </li>\n" +
+    "            <!-- duplicate the toggle-sidebar-btn -->\n" +
+    "            <li ng-click=\"toggleSidebarTextCollapse()\" ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
+    "                <a>\n" +
+    "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                </a>\n" +
+    "            </li>\n" +
     "            <li ng-repeat=\"item in sidebarMenuItems | orderBy:'weight'\"\n" +
     "                ng-attr-id=\"{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}\"\n" +
     "                ng-include=\"'template/eeh-navigation/sidebar-menu-item.html'\"\n" +
@@ -245,18 +251,24 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "    <a ng-if=\"item.href\" ng-href=\"{{item.href}}\" target=\"{{item.target ? item.target : '_self'}}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
+    "    <!-- aici trebuie de schimbat la ng-click dupa modelul: se cheama functia ng-click=\"collapseSidebar(item)\" -->\n" +
+    "    <!-- si de adaugat ng-attr-title=\"{{item.text | translate}}\", in loc de text sa fie item.description sau xz -->\n" +
     "    <a ng-if=\"!item.state && item.hasChildren()\"\n" +
-    "       ng-click=\"item.isCollapsed = !item.isCollapsed\">\n" +
+    "       ng-click=\"collapseSidebar(item)\"\n" +
+    "       ng-class=\"item.className\"\n" +
+    "       ng-attr-title=\"{{item.text | translate}}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "        <span class=\"navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}\"\n" +
     "              ng-class=\"item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass\"></span>\n" +
     "    </a>\n" +
+    "    <!-- dar aici de pus ng-attr-title=\"{{item.text | translate}}\" - astept descriptionul -->\n" +
     "    <ul ng-if=\"!item.state && item.hasChildren()\" uib-collapse=\"item.isCollapsed\"\n" +
     "        ng-class=\"{ 'text-collapsed': sidebarIsCollapsed }\"\n" +
     "        class=\"nav sidebar-nav sidebar-nav-nested\">\n" +
     "        <li ng-repeat=\"item in item.children() | orderBy:'weight'\"\n" +
     "            ng-attr-id=\"{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}\"\n" +
     "            ng-include=\"'template/eeh-navigation/sidebar-menu-item.html'\"\n" +
+    "            ng-attr-title=\"{{item.text | translate}}\"\n" +
     "            ng-click=\"changeTitle(item)\"\n" +
     "            ng-class=\"{ 'leaf': !item.hasChildren() }\"\n" +
     "            ng-if=\"item._isVisible()\"\n" +

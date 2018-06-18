@@ -9,6 +9,12 @@
                                              submit="searchInputSubmit"
                                              is-collapsed="sidebarIsCollapsed"></eeh-navigation-search-input>
             </li>
+            <!-- duplicate the toggle-sidebar-btn -->
+            <li ng-click="toggleSidebarTextCollapse()" ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
+                <a>
+                    <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
+                </a>
+            </li>
             <li ng-repeat="item in sidebarMenuItems | orderBy:'weight'"
                 ng-attr-id="{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}"
                 ng-include="'template/eeh-navigation/sidebar-menu-item.html'"
@@ -48,18 +54,24 @@
     <a ng-if="item.href" ng-href="{{item.href}}" target="{{item.target ? item.target : '_self'}}">
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
+    <!-- aici trebuie de schimbat la ng-click dupa modelul: se cheama functia ng-click="collapseSidebar(item)" -->
+    <!-- si de adaugat ng-attr-title="{{item.text | translate}}", in loc de text sa fie item.description sau xz -->
     <a ng-if="!item.state && item.hasChildren()"
-       ng-click="item.isCollapsed = !item.isCollapsed">
+       ng-click="collapseSidebar(item)"
+       ng-class="item.className"
+       ng-attr-title="{{item.text | translate}}">
         <span eeh-navigation-menu-item-content="item"></span>
         <span class="navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}"
               ng-class="item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass"></span>
     </a>
+    <!-- dar aici de pus ng-attr-title="{{item.text | translate}}" - astept descriptionul -->
     <ul ng-if="!item.state && item.hasChildren()" uib-collapse="item.isCollapsed"
         ng-class="{ 'text-collapsed': sidebarIsCollapsed }"
         class="nav sidebar-nav sidebar-nav-nested">
         <li ng-repeat="item in item.children() | orderBy:'weight'"
             ng-attr-id="{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}"
             ng-include="'template/eeh-navigation/sidebar-menu-item.html'"
+            ng-attr-title="{{item.text | translate}}"
             ng-click="changeTitle(item)"
             ng-class="{ 'leaf': !item.hasChildren() }"
             ng-if="item._isVisible()"

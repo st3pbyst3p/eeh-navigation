@@ -4,7 +4,7 @@
     MenuItemContentDirective.$inject = [ "eehNavigation" ];
     MenuDirective.$inject = [ "eehNavigation" ];
     SearchInputDirective.$inject = [ "eehNavigation" ];
-    SidebarDirective.$inject = [ "$window", "eehNavigation", "$filter" ];
+    SidebarDirective.$inject = [ "$window", "eehNavigation", "$filter", "$rootScope", "$timeout" ];
     angular.module("eehNavigation", [ "pascalprecht.translate" ]);
     "use strict";
     angular.module("eehNavigation").directive("eehNavigationActiveMenuItem", ActiveMenuItemDirective);
@@ -329,8 +329,8 @@
         };
     }
     "use strict";
-    angular.module("eehNavigation").directive("eehNavigationSidebar", [ "$window", "eehNavigation", "$filter", SidebarDirective ]);
-    function SidebarDirective($window, eehNavigation, $filter) {
+    angular.module("eehNavigation").directive("eehNavigationSidebar", [ "$window", "eehNavigation", "$filter", "$rootScope", "$timeout", SidebarDirective ]);
+    function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout) {
         return {
             restrict: "AE",
             transclude: true,
@@ -351,8 +351,33 @@
                 refresh: "=?"
             },
             link: function(scope) {
+                scope.compact = true;
+                scope.notCollapsed = [];
                 scope.changeTitle = function(elem) {
-                    document.title = $filter("translate")(elem.text);
+                    document.title = $filter("translate")(elem.text) + ": Alt App";
+                    if (window.innerWidth <= 800 && window.innerHeight <= 800) {
+                        $rootScope.$broadcast("menuCollapseStatus", true);
+                    }
+                    var v = document.getElementsByClassName("sidebar-active-collapsed");
+                    if (v.length > 0) v[0].className = "";
+                    if (scope.sidebarIsCollapsed) {
+                        if (scope.compact) scope.notCollapsed = [];
+                        $timeout(function() {
+                            var t = document.getElementsByClassName("leaf active");
+                            if (t.length > 0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
+                        }, 100);
+                        angular.forEach(menuItems(), function(menuItem) {
+                            if (!menuItem.isCollapsed) scope.notCollapsed.push(menuItem);
+                            menuItem.isCollapsed = true;
+                        });
+                    }
+                };
+                scope.collapseSidebar = function(elem) {
+                    var isCol = elem.isCollapsed;
+                    if (scope.compact) angular.forEach(menuItems(), function(menuItem) {
+                        menuItem.isCollapsed = true;
+                    });
+                    elem.isCollapsed = !isCol;
                 };
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
@@ -415,6 +440,25 @@
                 }, true);
                 scope.toggleSidebarTextCollapse = function() {
                     scope.sidebarIsCollapsed = !scope.sidebarIsCollapsed;
+                    if (scope.sidebarIsCollapsed) {
+                        var t = document.getElementsByClassName("leaf active");
+                        if (t.length > 0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
+                        angular.forEach(menuItems(), function(menuItem) {
+                            if (!menuItem.isCollapsed) {
+                                scope.notCollapsed.push(menuItem);
+                            }
+                        });
+                    } else {
+                        var t = document.getElementsByClassName("sidebar-active-collapsed");
+                        if (t.length > 0) t[0].className = "";
+                        angular.forEach(menuItems(), function(menuItem) {
+                            menuItem.className = "";
+                        });
+                        scope.notCollapsed.map(function(item) {
+                            item.isCollapsed = false;
+                        });
+                        scope.notCollapsed = [];
+                    }
                     setTextCollapseState();
                 };
                 function setTextCollapseState() {
