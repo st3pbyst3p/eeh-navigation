@@ -62,12 +62,12 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
         },
         link: function (scope) {
 
-            // Alt App fixes ---------------------------------------------------------------------------
+            // SERP fixes ---------------------------------------------------------------------------
             // changes the title of page, based on current pressed item
             scope.compact = true; // param if the sidebar collapses after press or not
             scope.notCollapsed = []; // the opened elements
             scope.changeTitle = function(elem){
-                document.title = $filter("translate")(elem.text) + ": Alt App";
+                document.title = $filter("translate")(elem.text) + ": SERP";
                 // collapses menu on click, if it-s a mobile device
                 if(window.innerWidth <= 800 && window.innerHeight <= 800) {
                     $rootScope.$broadcast("menuCollapseStatus", true);

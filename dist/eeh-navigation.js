@@ -354,7 +354,7 @@
                 scope.compact = true;
                 scope.notCollapsed = [];
                 scope.changeTitle = function(elem) {
-                    document.title = $filter("translate")(elem.text) + ": Alt App";
+                    document.title = $filter("translate")(elem.text) + ": SERP";
                     if (window.innerWidth <= 800 && window.innerHeight <= 800) {
                         $rootScope.$broadcast("menuCollapseStatus", true);
                     }
