@@ -55,23 +55,23 @@
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
     <!-- aici trebuie de schimbat la ng-click dupa modelul: se cheama functia ng-click="collapseSidebar(item)" -->
-    <!-- si de adaugat ng-attr-title="{{item.text | translate}}", in loc de text sa fie item.description sau xz -->
+    <!-- checks whether there is a description or not and puts it in the title -->
     <a ng-if="!item.state && item.hasChildren()"
        ng-click="collapseSidebar(item)"
        ng-class="item.className"
-       ng-attr-title="{{item.text | translate}}">
+       ng-attr-title="{{item.description ? item.description : item.text | translate}}">
         <span eeh-navigation-menu-item-content="item"></span>
         <span class="navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}"
               ng-class="item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass"></span>
     </a>
-    <!-- dar aici de pus ng-attr-title="{{item.text | translate}}" - astept descriptionul -->
+    <!-- checks whether there is a description or not and puts it in the title -->
     <ul ng-if="!item.state && item.hasChildren()" uib-collapse="item.isCollapsed"
         ng-class="{ 'text-collapsed': sidebarIsCollapsed }"
         class="nav sidebar-nav sidebar-nav-nested">
         <li ng-repeat="item in item.children() | orderBy:'weight'"
             ng-attr-id="{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}"
             ng-include="'template/eeh-navigation/sidebar-menu-item.html'"
-            ng-attr-title="{{item.text | translate}}"
+            ng-attr-title="{{item.description ? item.description : item.text | translate}}"
             ng-click="changeTitle(item)"
             ng-class="{ 'leaf': !item.hasChildren() }"
             ng-if="item._isVisible()"

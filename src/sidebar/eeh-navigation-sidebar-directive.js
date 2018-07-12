@@ -67,7 +67,7 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
             scope.compact = true; // param if the sidebar collapses after press or not
             scope.notCollapsed = []; // the opened elements
             scope.changeTitle = function(elem){
-                document.title = $filter("translate")(elem.text) + ": SERP";
+                document.title = $filter("translate")(elem.text) + " : " + $rootScope.CompanyName;
                 // collapses menu on click, if it-s a mobile device
                 if(window.innerWidth <= 800 && window.innerHeight <= 800) {
                     $rootScope.$broadcast("menuCollapseStatus", true);
