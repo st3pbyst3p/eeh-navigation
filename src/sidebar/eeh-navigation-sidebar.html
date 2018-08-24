@@ -10,9 +10,10 @@
                                              is-collapsed="sidebarIsCollapsed"></eeh-navigation-search-input>
             </li>
             <!-- duplicate the toggle-sidebar-btn -->
-            <li ng-click="toggleSidebarTextCollapse()" ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
+            <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
                 <a>
-                    <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
+                    <span ng-click="toggleSidebarTextCollapse()" class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
+                    <span ng-hide="sidebarIsCollapsed" ng-click="minimizeFn()" class="pull-right" ng-class="returnClass()"></span>
                 </a>
             </li>
             <li ng-repeat="item in sidebarMenuItems | orderBy:'weight'"

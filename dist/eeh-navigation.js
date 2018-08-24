@@ -358,7 +358,9 @@
                         $rootScope.$broadcast("menuCollapseStatus", true);
                     }
                     var v = document.getElementsByClassName("sidebar-active-collapsed");
+                    var v2 = document.getElementsByClassName("sidebar-active-parent");
                     if (v.length > 0) v[0].className = "";
+                    if (v2.length > 0) v2[0].className = "";
                     if (scope.sidebarIsCollapsed) {
                         if (scope.compact) scope.notCollapsed = [];
                         $timeout(function() {
@@ -369,14 +371,42 @@
                             if (!menuItem.isCollapsed) scope.notCollapsed.push(menuItem);
                             menuItem.isCollapsed = true;
                         });
+                    } else {
+                        $timeout(function() {
+                            var t = document.getElementsByClassName("leaf active");
+                            if (t.length > 0) t[0].parentElement.parentElement.firstElementChild.className = t[0].parentElement.parentElement.firstElementChild.className + " sidebar-active-parent";
+                        }, 100);
                     }
                 };
                 scope.collapseSidebar = function(elem) {
+                    var v2 = document.getElementsByClassName("sidebar-active-parent");
+                    if (v2.length > 0) v2[0].className = "";
                     var isCol = elem.isCollapsed;
                     if (scope.compact) angular.forEach(menuItems(), function(menuItem) {
                         menuItem.isCollapsed = true;
                     });
                     elem.isCollapsed = !isCol;
+                };
+                scope.minimized = true;
+                scope.minimizeFn = function() {
+                    scope.minimized = !scope.minimized;
+                    angular.forEach(menuItems(), function(menuItem) {
+                        if (!scope.minimized) if (menuItem.isCollapsed === false) scope.notCollapsed.push(menuItem);
+                        menuItem.isCollapsed = scope.minimized;
+                    });
+                    if (scope.minimized) {
+                        scope.notCollapsed.map(function(item) {
+                            item.isCollapsed = false;
+                        });
+                        scope.notCollapsed = [];
+                    }
+                };
+                scope.returnClass = function() {
+                    if (scope.minimized) {
+                        return "glyphicon glyphicon-option-horizontal";
+                    } else {
+                        return "glyphicon glyphicon-option-vertical";
+                    }
                 };
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();

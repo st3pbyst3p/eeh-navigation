@@ -73,8 +73,10 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                     $rootScope.$broadcast("menuCollapseStatus", true);
                   }
                 // removes active class of elements
-                var v = document.getElementsByClassName('sidebar-active-collapsed'); // searches if there are elements with class
-                if(v.length>0) v[0].className = "";
+                var v = document.getElementsByClassName("sidebar-active-collapsed");
+                var v2 = document.getElementsByClassName("sidebar-active-parent");                   
+                if (v.length > 0) v[0].className = "";
+                if (v2.length > 0) v2[0].className = "";
                     
                 // if collapsed, collapses side-panel after press + sets class to active element
                 if(scope.sidebarIsCollapsed) {
@@ -89,17 +91,46 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                         menuItem.isCollapsed = true;
                     });    
                 }
+                else {
+                    $timeout(function() {
+                        var t = document.getElementsByClassName("leaf active"); // setting black font for parent element
+                        if (t.length > 0) t[0].parentElement.parentElement.firstElementChild.className=  t[0].parentElement.parentElement.firstElementChild.className + " sidebar-active-parent";
+                    }, 100);
+                }
             };
 
             // for leaving only 1 menu point opened, while rest are closed
             scope.collapseSidebar = function(elem){
+                var v2 = document.getElementsByClassName("sidebar-active-parent");
+                if (v2.length > 0) v2[0].className = ""; // removing class for making font black
+
                 var isCol = elem.isCollapsed;
                 if(scope.compact)
                 angular.forEach(menuItems(), function(menuItem) {
                     menuItem.isCollapsed = true;
                 });
                 elem.isCollapsed = !isCol;
-            }
+            };
+
+            // function to expand all elements from menu - linked to btn on sidebar
+            scope.minimized = true;
+            scope.minimizeFn = function() {
+                scope.minimized = !scope.minimized;
+                angular.forEach(menuItems(), function(menuItem) {
+                    if(!scope.minimized) if(menuItem.isCollapsed === false) scope.notCollapsed.push(menuItem);
+                    menuItem.isCollapsed = scope.minimized;
+                });
+                if(scope.minimized) { // expands back the originally opened elements
+                    scope.notCollapsed.map(function(item) {
+                        item.isCollapsed = false;
+                    });
+                    scope.notCollapsed = [];
+                }
+            };
+            scope.returnClass = function() { // returns different icons whether the menu is expanded or not
+                if(scope.minimized) { return "glyphicon glyphicon-option-horizontal"; }
+                    else { return "glyphicon glyphicon-option-vertical"; }
+            };
 
             // -----------------------------------------------------------------------------------------
 

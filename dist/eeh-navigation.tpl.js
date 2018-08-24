@@ -207,9 +207,10 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                                             is-collapsed=\"sidebarIsCollapsed\"></eeh-navigation-search-input>\n" +
     "            </li>\n" +
     "            <!-- duplicate the toggle-sidebar-btn -->\n" +
-    "            <li ng-click=\"toggleSidebarTextCollapse()\" ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
+    "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
     "                <a>\n" +
-    "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                    <span ng-click=\"toggleSidebarTextCollapse()\" class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                    <span ng-hide=\"sidebarIsCollapsed\" ng-click=\"minimizeFn()\" class=\"pull-right\" ng-class=\"returnClass()\"></span>\n" +
     "                </a>\n" +
     "            </li>\n" +
     "            <li ng-repeat=\"item in sidebarMenuItems | orderBy:'weight'\"\n" +
