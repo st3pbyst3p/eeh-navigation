@@ -360,7 +360,7 @@
                     var v = document.getElementsByClassName("sidebar-active-collapsed");
                     var v2 = document.getElementsByClassName("sidebar-active-parent");
                     if (v.length > 0) v[0].className = "";
-                    if (v2.length > 0) v2[0].className = "";
+                    if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
                     if (scope.sidebarIsCollapsed) {
                         if (scope.compact) scope.notCollapsed = [];
                         $timeout(function() {
@@ -380,7 +380,7 @@
                 };
                 scope.collapseSidebar = function(elem) {
                     var v2 = document.getElementsByClassName("sidebar-active-parent");
-                    if (v2.length > 0) v2[0].className = "";
+                    if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
                     var isCol = elem.isCollapsed;
                     if (scope.compact) angular.forEach(menuItems(), function(menuItem) {
                         menuItem.isCollapsed = true;

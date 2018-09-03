@@ -23,6 +23,7 @@
                 ng-if="item._isVisible()"
                 ng-click="topLevelMenuItemClickHandler(item)"
                 ui-sref-active-eq="active"
+                ng-attr-title="{{item.description ? item.description : item.text | translate}}"
                 eeh-navigation-active-menu-item="item"></li>
             <li ng-click="toggleSidebarTextCollapse()" ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
                 <a>

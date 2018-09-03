@@ -220,6 +220,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                ng-if=\"item._isVisible()\"\n" +
     "                ng-click=\"topLevelMenuItemClickHandler(item)\"\n" +
     "                ui-sref-active-eq=\"active\"\n" +
+    "                ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\n" +
     "                eeh-navigation-active-menu-item=\"item\"></li>\n" +
     "            <li ng-click=\"toggleSidebarTextCollapse()\" ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
     "                <a>\n" +

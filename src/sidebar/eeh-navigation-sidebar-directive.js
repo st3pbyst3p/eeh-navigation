@@ -76,7 +76,7 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 var v = document.getElementsByClassName("sidebar-active-collapsed");
                 var v2 = document.getElementsByClassName("sidebar-active-parent");                   
                 if (v.length > 0) v[0].className = "";
-                if (v2.length > 0) v2[0].className = "";
+                if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
                     
                 // if collapsed, collapses side-panel after press + sets class to active element
                 if(scope.sidebarIsCollapsed) {
@@ -102,7 +102,7 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
             // for leaving only 1 menu point opened, while rest are closed
             scope.collapseSidebar = function(elem){
                 var v2 = document.getElementsByClassName("sidebar-active-parent");
-                if (v2.length > 0) v2[0].className = ""; // removing class for making font black
+                if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = ""; // removing class for making font black
 
                 var isCol = elem.isCollapsed;
                 if(scope.compact)
