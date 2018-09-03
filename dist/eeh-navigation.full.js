@@ -374,7 +374,7 @@
                     } else {
                         $timeout(function() {
                             var t = document.getElementsByClassName("leaf active");
-                            if (t.length > 0) t[0].parentElement.parentElement.firstElementChild.className = t[0].parentElement.parentElement.firstElementChild.className + " sidebar-active-parent";
+                            if (t.length > 0 && t[0].parentElement.parentElement.children[0].tagName === "A") t[0].parentElement.parentElement.children[0].className = "sidebar-active-parent";
                         }, 100);
                     }
                 };
