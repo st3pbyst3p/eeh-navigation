@@ -1,8 +1,8 @@
 <nav class="navbar navbar-collapse navbar-default eeh-navigation eeh-navigation-sidebar eeh-padding" role="navigation"
-    ng-class="navClass" uib-collapse="checkButtonState" style="height: 100% !important;">
+    ng-class="navClass" uib-collapse="checkButtonState">
     <!-- is set to collapse the parent container -->
-    <div class="navbar-collapse" style="height: 100% !important;">
-        <ul class="nav sidebar-nav" style="height: 100% !important;">
+    <div class="navbar-collapse" >
+        <ul class="nav sidebar-nav">
             <li class="sidebar-search" ng-if="searchInputIsVisible">
                 <eeh-navigation-search-input class="sidebar-search-input"
                                              icon-class="searchInputIconClass"
@@ -67,7 +67,7 @@
               ng-class="item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass"></span>
     </a>
     <!-- checks whether there is a description or not and puts it in the title -->
-    <ul ng-if="!item.state && item.hasChildren()" uib-collapse="item.isCollapsed" style="height: 100% !important;"
+    <ul ng-if="!item.state && item.hasChildren()" uib-collapse="item.isCollapsed"
         ng-class="{ 'text-collapsed': sidebarIsCollapsed }"
         class="nav sidebar-nav sidebar-nav-nested">
         <li ng-repeat="item in item.children() | orderBy:'weight'"
