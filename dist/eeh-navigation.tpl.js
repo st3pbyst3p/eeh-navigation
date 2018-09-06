@@ -196,10 +196,10 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
 
   $templateCache.put('template/eeh-navigation/sidebar/eeh-navigation-sidebar.html',
     "<nav class=\"navbar navbar-collapse navbar-default eeh-navigation eeh-navigation-sidebar eeh-padding\" role=\"navigation\"\n" +
-    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState\">\n" +
+    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState\" style=\"height: 100% !important;\">\n" +
     "    <!-- is set to collapse the parent container -->\n" +
-    "    <div class=\"navbar-collapse\" >\n" +
-    "        <ul class=\"nav sidebar-nav\">\n" +
+    "    <div class=\"navbar-collapse\" style=\"height: 100% !important;\">\n" +
+    "        <ul class=\"nav sidebar-nav\" style=\"height: 100% !important;\">\n" +
     "            <li class=\"sidebar-search\" ng-if=\"searchInputIsVisible\">\n" +
     "                <eeh-navigation-search-input class=\"sidebar-search-input\"\n" +
     "                                             icon-class=\"searchInputIconClass\"\n" +
@@ -264,7 +264,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "              ng-class=\"item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass\"></span>\n" +
     "    </a>\n" +
     "    <!-- checks whether there is a description or not and puts it in the title -->\n" +
-    "    <ul ng-if=\"!item.state && item.hasChildren()\" uib-collapse=\"item.isCollapsed\"\n" +
+    "    <ul ng-if=\"!item.state && item.hasChildren()\" uib-collapse=\"item.isCollapsed\" style=\"height: 100% !important;\"\n" +
     "        ng-class=\"{ 'text-collapsed': sidebarIsCollapsed }\"\n" +
     "        class=\"nav sidebar-nav sidebar-nav-nested\">\n" +
     "        <li ng-repeat=\"item in item.children() | orderBy:'weight'\"\n" +
