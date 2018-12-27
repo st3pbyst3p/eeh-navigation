@@ -1,10 +1,5 @@
 @import "../variables";
 
-.eeh-padding {
-  padding-right: 0; 
-  padding-left: 0;
-}
-
 .eeh-navigation-sidebar {
   border-radius: 0;
   border-top: none;
@@ -12,7 +7,7 @@
   border-left: none;
 
   > .navbar-collapse {
-    padding-right: 0; 
+    padding-right: 0;
     padding-left: 0;
 
     > ul.sidebar-nav {

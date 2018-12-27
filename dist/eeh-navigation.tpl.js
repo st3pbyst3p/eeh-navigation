@@ -5,7 +5,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "<span ng-if=\"menuItem.isIconVisible\"\n" +
     "      class=\"menu-item-icon icon-fw {{ iconBaseClass() }} {{ menuItem.iconClass}}\"></span>\n" +
     "<span ng-if=\"menuItem.text\"\n" +
-    "      class=\"menu-item-text\"> {{ menuItem.text|translate }}</span>\n" +
+    "      class=\"menu-item-text\" translate=\"{{ menuItem.text }}\"></span>\n" +
     "<span ng-if=\"menuItem._ngBindHtml()\" ng-bind-html=\"menuItem._ngBindHtml()\"></span>\n"
   );
 
@@ -142,7 +142,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "    </a>\n" +
     "    <a ng-if=\"item.hasChildren()\" uib-dropdown-toggle=\"\">\n" +
     "        <span class=\"icon-fw {{ iconBaseClass() }} {{ item.iconClass }}\"></span>\n" +
-    "        <span> {{ item.text|translate }}</span>\n" +
+    "        <span translate=\"{{ item.text }}\"></span>\n" +
     "        <span class=\"caret\"></span>\n" +
     "    </a>\n" +
     "    <ul ng-if=\"item.hasChildren()\" class=\"dropdown-menu\">\n" +
@@ -195,10 +195,10 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
 
 
   $templateCache.put('template/eeh-navigation/sidebar/eeh-navigation-sidebar.html',
-    "<nav class=\"navbar navbar-collapse navbar-default eeh-navigation eeh-navigation-sidebar eeh-padding\" role=\"navigation\"\n" +
-    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState\">\n" +
+    "<nav class=\"navbar navbar-default eeh-navigation eeh-navigation-sidebar\" role=\"navigation\"\n" +
+    "    ng-class=\"navClass\">\n" +
     "    <!-- is set to collapse the parent container -->\n" +
-    "    <div class=\"navbar-collapse\" >\n" +
+    "    <div class=\"navbar-collapse\" uib-collapse=\"isNavbarCollapsed\">\n" +
     "        <ul class=\"nav sidebar-nav\">\n" +
     "            <li class=\"sidebar-search\" ng-if=\"searchInputIsVisible\">\n" +
     "                <eeh-navigation-search-input class=\"sidebar-search-input\"\n" +
