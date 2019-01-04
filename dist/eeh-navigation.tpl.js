@@ -195,10 +195,10 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
 
 
   $templateCache.put('template/eeh-navigation/sidebar/eeh-navigation-sidebar.html',
-    "<nav class=\"navbar navbar-default eeh-navigation eeh-navigation-sidebar\" role=\"navigation\"\n" +
-    "    ng-class=\"navClass\">\n" +
+    "<nav class=\"navbar navbar-collapse navbar-default eeh-navigation eeh-navigation-sidebar eeh-padding\" role=\"navigation\"\n" +
+    "    ng-class=\"navClass\" uib-collapse=\"checkButtonState\">\n" +
     "    <!-- is set to collapse the parent container -->\n" +
-    "    <div class=\"navbar-collapse\" uib-collapse=\"isNavbarCollapsed\">\n" +
+    "    <div class=\"navbar-collapse\">\n" +
     "        <ul class=\"nav sidebar-nav\">\n" +
     "            <li class=\"sidebar-search\" ng-if=\"searchInputIsVisible\">\n" +
     "                <eeh-navigation-search-input class=\"sidebar-search-input\"\n" +
