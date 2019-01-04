@@ -2,6 +2,11 @@
   margin-right: 0;
 }
 
+.eeh-padding {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .eeh-navigation-sidebar {
   border-radius: 0;
   border-top: none;
