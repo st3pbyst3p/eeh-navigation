@@ -101,15 +101,23 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
             };
 
             // for leaving only 1 menu point opened, while rest are closed
-            scope.collapseSidebar = function(elem){
+            scope.collapseSidebar = function(elem) {
                 var v2 = document.getElementsByClassName("sidebar-active-parent");
-                if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = ""; // removing class for making font black
+                if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
+                var isCol = elem.isCollapsed, parent = null;
 
-                var isCol = elem.isCollapsed;
-                if(scope.compact)
-                angular.forEach(menuItems(), function(menuItem) {
+                // added catching parent - for 3-level menu
+                if (scope.compact) angular.forEach(menuItems(), function(menuItem) {
+                    if(menuItem.hasChildren()) {
+                        Object.keys(menuItem).map(function(key){
+                            if (angular.isObject(menuItem[key]) && menuItem[key] instanceof MenuItem && menuItem[key].menuItemName === elem.menuItemName) {
+                                parent = menuItem;
+                            }
+                        });
+                    }
                     menuItem.isCollapsed = true;
                 });
+                if(parent) parent.isCollapsed = false;
                 elem.isCollapsed = !isCol;
             };
 
