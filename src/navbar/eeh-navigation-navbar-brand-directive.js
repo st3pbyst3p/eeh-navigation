@@ -1,5 +1,6 @@
 'use strict';
-angular.module('eehNavigation').directive('eehNavigationNavbarBrand', NavbarBrandDirective);
+angular.module("eehNavigation").directive("eehNavigationNavbarBrand", NavbarBrandDirective);
+NavbarBrandDirective.$inject = ['$rootScope', '$timeout'];
 
 /**
  * @ngInject
@@ -17,17 +18,26 @@ angular.module('eehNavigation').directive('eehNavigationNavbarBrand', NavbarBran
  * @param {string=} src Sets the src attribute of the image in the brand element.
  * @param {function=} click Sets the callback function of the brand element.
  */
-function NavbarBrandDirective() {
+function NavbarBrandDirective($rootScope, $timeout) {
     return {
-        restrict: 'AE',
-        templateUrl: 'template/eeh-navigation/navbar/eeh-navigation-navbar-brand.html',
+        restrict: "AE",
+        templateUrl: "template/eeh-navigation/navbar/eeh-navigation-navbar-brand.html",
         scope: {
-            text: '=',
-            state: '=',
-            href: '=',
-            target: '=',
-            src: '=',
-            click: '='
+            text: "=",
+            state: "=",
+            href: "=",
+            target: "=",
+            src: "=",
+            click: "="
+        },
+        link: function(scope) {
+            $rootScope.$on('logoUploaded', function(){
+                var url = scope.src;
+                scope.src = null;
+                $timeout(function () {
+                    scope.src = url;
+                }, 1000);
+            });
         }
     };
 }

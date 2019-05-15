@@ -217,7 +217,8 @@
     }
     "use strict";
     angular.module("eehNavigation").directive("eehNavigationNavbarBrand", NavbarBrandDirective);
-    function NavbarBrandDirective() {
+    NavbarBrandDirective.$inject = [ "$rootScope", "$timeout" ];
+    function NavbarBrandDirective($rootScope, $timeout) {
         return {
             restrict: "AE",
             templateUrl: "template/eeh-navigation/navbar/eeh-navigation-navbar-brand.html",
@@ -228,6 +229,15 @@
                 target: "=",
                 src: "=",
                 click: "="
+            },
+            link: function(scope) {
+                $rootScope.$on("logoUploaded", function() {
+                    var url = scope.src;
+                    scope.src = null;
+                    $timeout(function() {
+                        scope.src = url;
+                    }, 1e3);
+                });
             }
         };
     }
