@@ -53,15 +53,18 @@
       &:hover,
       &:focus {
         color: $navbar-default-link-hover-color;
-        background-color: $navbar-default-link-hover-bg;
+        // background-color: $navbar-default-link-hover-bg;
+        background-color: #e7e7e7;
       }
     }
     > .active > a {
       &,
       &:hover,
       &:focus {
-        color: $navbar-default-link-active-color;
+        // color: $navbar-default-link-active-color;
+        color: #443d82;
         background-color: $navbar-default-link-active-bg;
+        font-weight: 600;
       }
     }
     > .disabled > a {

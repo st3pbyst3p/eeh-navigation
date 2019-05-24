@@ -44,11 +44,12 @@
 }
 .eeh-navigation-sidebar .sidebar-nav > li a:hover, .eeh-navigation-sidebar .sidebar-nav > li a:focus {
   color: #333;
-  background-color: transparent;
+  background-color: #e7e7e7;
 }
 .eeh-navigation-sidebar .sidebar-nav > .active > a, .eeh-navigation-sidebar .sidebar-nav > .active > a:hover, .eeh-navigation-sidebar .sidebar-nav > .active > a:focus {
-  color: #555;
+  color: #443d82;
   background-color: #e7e7e7;
+  font-weight: 600;
 }
 .eeh-navigation-sidebar .sidebar-nav > .disabled > a, .eeh-navigation-sidebar .sidebar-nav > .disabled > a:hover, .eeh-navigation-sidebar .sidebar-nav > .disabled > a:focus {
   color: #ccc;
