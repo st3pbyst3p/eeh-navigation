@@ -67,7 +67,8 @@
       &:focus {
         // color: $navbar-default-link-active-color;
         color: #443d82;
-        background-color: $navbar-default-link-active-bg;
+        // background-color: $navbar-default-link-active-bg;
+        background-color: #f5f5f5;
         font-weight: 600;
       }
     }
@@ -86,7 +87,8 @@
   .eeh-navigation-sidebar {
     z-index: 1;
     position: absolute;
-    width: 250px;
+    // width: 250px;
+    width: 275px;
   }
 
   .eeh-navigation-sidebar.sidebar-text-collapsed {

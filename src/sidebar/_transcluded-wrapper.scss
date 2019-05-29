@@ -1,7 +1,7 @@
 #eeh-navigation-page-wrapper {
   padding: 0 15px;
   min-height: 568px;
-  background-color: #fff;
+  background-color: #fafafa;
 }
 
 #eeh-navigation-page-wrapper.sidebar-invisible {
@@ -12,7 +12,8 @@
 @media(min-width:768px) {
   #eeh-navigation-page-wrapper {
     position: inherit;
-    margin: 0 0 0 250px;
+    // margin: 0 0 0 250px;
+    margin: 0 0 0 275px;
     padding: 0 30px;
     border-left: 1px solid #e7e7e7;
   }
