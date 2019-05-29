@@ -34,12 +34,13 @@
 .eeh-navigation-sidebar .sidebar-search .sidebar-search-input a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 10px 0 10px 15px;
 }
 .eeh-navigation-sidebar .sidebar-arrow {
   line-height: 1.5em;
   font-size: 12px;
   color: #443d82;
+  margin: 5px 0 5px 5px !important;
 }
 .eeh-navigation-sidebar .sidebar-nav > li a {
   color: #777;
