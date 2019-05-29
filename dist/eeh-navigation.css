@@ -34,7 +34,7 @@
 .eeh-navigation-sidebar .sidebar-search .sidebar-search-input a {
   position: relative;
   display: block;
-  padding: 10px 0 10px 15px;
+  padding: 10px 15px;
 }
 .eeh-navigation-sidebar .sidebar-arrow {
   line-height: 1.5em;
@@ -44,6 +44,7 @@
 }
 .eeh-navigation-sidebar .sidebar-nav > li a {
   color: #777;
+  padding: 10px 0 10px 15px;
 }
 .eeh-navigation-sidebar .sidebar-nav > li a:hover, .eeh-navigation-sidebar .sidebar-nav > li a:focus {
   background-color: #e7e7e7;
