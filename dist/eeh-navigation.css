@@ -38,12 +38,13 @@
 }
 .eeh-navigation-sidebar .sidebar-arrow {
   line-height: 1.5em;
+  font-size: 12px;
+  color: #443d82;
 }
 .eeh-navigation-sidebar .sidebar-nav > li a {
   color: #777;
 }
 .eeh-navigation-sidebar .sidebar-nav > li a:hover, .eeh-navigation-sidebar .sidebar-nav > li a:focus {
-  color: #333;
   background-color: #e7e7e7;
 }
 .eeh-navigation-sidebar .sidebar-nav > .active > a, .eeh-navigation-sidebar .sidebar-nav > .active > a:hover, .eeh-navigation-sidebar .sidebar-nav > .active > a:focus {
@@ -122,6 +123,7 @@
 .eeh-navigation .icon-fw {
   width: 1.28571429em;
   text-align: center;
+  margin: 5px 5px 5px 0;
 }
 .eeh-navigation .float-right {
   float: right !important;

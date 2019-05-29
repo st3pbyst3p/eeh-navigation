@@ -44,6 +44,8 @@
 
   .sidebar-arrow {
     line-height: 1.5em;
+    font-size: 12px; 
+    color: #443d82;
   }
 
   .sidebar-nav {
@@ -52,7 +54,7 @@
 
       &:hover,
       &:focus {
-        color: $navbar-default-link-hover-color;
+        // color: $navbar-default-link-hover-color;
         // background-color: $navbar-default-link-hover-bg;
         background-color: #e7e7e7;
       }
