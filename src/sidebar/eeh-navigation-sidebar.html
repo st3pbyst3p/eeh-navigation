@@ -13,7 +13,7 @@
             <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
                 <a>
                     <span ng-click="toggleSidebarTextCollapse()" class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
-                    <span ng-hide="sidebarIsCollapsed" ng-click="minimizeFn()" class="pull-right" ng-class="returnClass()"></span>
+                    <span ng-hide="sidebarIsCollapsed" ng-click="minimizeFn()" class="minimize pull-right" ng-class="returnClass()"></span>
                 </a>
             </li>
             <li ng-repeat="item in sidebarMenuItems | orderBy:'weight'"
@@ -22,7 +22,7 @@
                 ng-class="{ 'leaf': !item.hasChildren() }"
                 ng-if="item._isVisible()"
                 ng-click="topLevelMenuItemClickHandler(item)"
-                ui-sref-active-eq="active"
+                ui-sref-active="active"
                 ng-attr-title="{{item.description ? item.description : item.text | translate}}"
                 eeh-navigation-active-menu-item="item"></li>
             <li ng-click="toggleSidebarTextCollapse()" ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
@@ -77,7 +77,7 @@
             ng-click="changeTitle(item)"
             ng-class="{ 'leaf': !item.hasChildren() }"
             ng-if="item._isVisible()"
-            ui-sref-active-eq="active"
+            ui-sref-active="active"
             eeh-navigation-active-menu-item="item"></li>
     </ul>
 </script>
