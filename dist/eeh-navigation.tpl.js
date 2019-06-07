@@ -225,7 +225,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "\n" +
     "                    <span ng-click=\"toggleSidebarTextCollapse()\" class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\r" +
     "\n" +
-    "                    <span ng-hide=\"sidebarIsCollapsed\" ng-click=\"minimizeFn()\" class=\"pull-right\" ng-class=\"returnClass()\"></span>\r" +
+    "                    <span ng-hide=\"sidebarIsCollapsed\" ng-click=\"minimizeFn()\" class=\"minimize pull-right\" ng-class=\"returnClass()\"></span>\r" +
     "\n" +
     "                </a>\r" +
     "\n" +
@@ -243,7 +243,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "\n" +
     "                ng-click=\"topLevelMenuItemClickHandler(item)\"\r" +
     "\n" +
-    "                ui-sref-active-eq=\"active\"\r" +
+    "                ui-sref-active=\"active\"\r" +
     "\n" +
     "                ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\r" +
     "\n" +
@@ -353,7 +353,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "\n" +
     "            ng-if=\"item._isVisible()\"\r" +
     "\n" +
-    "            ui-sref-active-eq=\"active\"\r" +
+    "            ui-sref-active=\"active\"\r" +
     "\n" +
     "            eeh-navigation-active-menu-item=\"item\"></li>\r" +
     "\n" +

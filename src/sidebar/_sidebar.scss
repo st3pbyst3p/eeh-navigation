@@ -49,16 +49,21 @@
     margin: 5px 0 5px 5px !important;
   }
 
+  .minimize {
+    padding-right: 5px;
+  }
+
   .sidebar-nav {
     > li a {
-      color: $navbar-default-link-color;
+      // color: $navbar-default-link-color;
+      color: $serp-default-link-color;
       padding: 10px 0 10px 15px;
 
       &:hover,
       &:focus {
         // color: $navbar-default-link-hover-color;
         // background-color: $navbar-default-link-hover-bg;
-        background-color: #e7e7e7;
+        background-color: $serp-default-link-hover-bg;
       }
     }
     > .active > a {
@@ -66,9 +71,9 @@
       &:hover,
       &:focus {
         // color: $navbar-default-link-active-color;
-        color: #443d82;
+        color: $serp-default-link-active-color;
         // background-color: $navbar-default-link-active-bg;
-        background-color: #f5f5f5;
+        background-color: $serp-default-link-active-bg;
         font-weight: 600;
       }
     }

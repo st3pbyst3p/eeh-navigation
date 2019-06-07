@@ -42,8 +42,11 @@
   color: #443d82;
   margin: 5px 0 5px 5px !important;
 }
+.eeh-navigation-sidebar .minimize {
+  padding-right: 5px;
+}
 .eeh-navigation-sidebar .sidebar-nav > li a {
-  color: #777;
+  color: #444;
   padding: 10px 0 10px 15px;
 }
 .eeh-navigation-sidebar .sidebar-nav > li a:hover, .eeh-navigation-sidebar .sidebar-nav > li a:focus {
