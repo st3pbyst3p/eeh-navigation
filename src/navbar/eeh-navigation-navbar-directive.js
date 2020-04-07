@@ -54,6 +54,9 @@ var NavbarDirective = function ($window, $rootScope, eehNavigation) {
             };
             scope.$watch(eehNavigation.menuItems, scope.refresh, true);
 
+            // adaugat event ca sa faca refresh in caz ca se modifica elementele
+            scope.$on('eehNavItemsRefresh', scope.refresh);
+
             var windowElement = angular.element($window);
             windowElement.bind('resize', function () {
                 scope.$apply();

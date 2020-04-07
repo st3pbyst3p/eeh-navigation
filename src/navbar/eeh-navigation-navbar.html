@@ -23,6 +23,7 @@
                     ng-attr-id="{{item.id ? item.id : 'eeh-navigation-navbar-' + item.menuItemName}}"
                     ng-include="'template/eeh-navigation/navbar-menu-item.html'"
                     ng-if="item._isVisible()"
+                    class="{{ item.itemClass }}"
                     uib-dropdown
                     ui-sref-active-eq="active"
                     eeh-navigation-active-menu-item="item">

@@ -108,6 +108,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                    ng-attr-id=\"{{item.id ? item.id : 'eeh-navigation-navbar-' + item.menuItemName}}\"\n" +
     "                    ng-include=\"'template/eeh-navigation/navbar-menu-item.html'\"\n" +
     "                    ng-if=\"item._isVisible()\"\n" +
+    "                    class=\"{{ item.itemClass }}\"\n" +
     "                    uib-dropdown\n" +
     "                    ui-sref-active-eq=\"active\"\n" +
     "                    eeh-navigation-active-menu-item=\"item\">\n" +

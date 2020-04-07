@@ -267,6 +267,7 @@
                     });
                 };
                 scope.$watch(eehNavigation.menuItems, scope.refresh, true);
+                scope.$on("eehNavItemsRefresh", scope.refresh);
                 var windowElement = angular.element($window);
                 windowElement.bind("resize", function() {
                     scope.$apply();
