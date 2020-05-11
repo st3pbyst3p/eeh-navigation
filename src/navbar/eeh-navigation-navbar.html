@@ -43,6 +43,11 @@
 </nav>
 
 <script type="text/ng-template" id="template/eeh-navigation/navbar-menu-item.html">
+
+    <!-- in case there is a dynamic directive instead of menu point -->
+    <div ng-if="item.altDirective" eeh-navigation-alt-dynamic-directive="{{item}}"></div>
+
+
     <p ng-if="item.isReadOnly" class="navbar-text">
         <span eeh-navigation-menu-item-content="item"></span>
     </p>

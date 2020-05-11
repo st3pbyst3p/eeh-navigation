@@ -34,6 +34,7 @@ MenuItem.prototype._isVisible = function () {
         angular.isUndefined(this.href) &&
         angular.isUndefined(this.click) &&
         angular.isUndefined(this.ngInclude) &&
+        angular.isUndefined(this.altDirective) && // custom condition (to add custom directive)
         !this.isReadOnly) {
         return false;
     }

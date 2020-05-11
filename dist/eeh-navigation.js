@@ -64,7 +64,7 @@
         var hasVisibleChildren = this.children().filter(function(child) {
             return child._isVisible() !== false;
         }).length > 0;
-        if (!hasVisibleChildren && !this.isDivider && angular.isUndefined(this.state) && angular.isUndefined(this.href) && angular.isUndefined(this.click) && angular.isUndefined(this.ngInclude) && !this.isReadOnly) {
+        if (!hasVisibleChildren && !this.isDivider && angular.isUndefined(this.state) && angular.isUndefined(this.href) && angular.isUndefined(this.click) && angular.isUndefined(this.ngInclude) && angular.isUndefined(this.altDirective) && !this.isReadOnly) {
             return false;
         }
         if (angular.isFunction(this.isVisible)) {
@@ -232,6 +232,20 @@
         };
     }
     "use strict";
+    angular.module("eehNavigation").directive("eehNavigationAltDynamicDirective", [ "$compile", function($compile) {
+        return {
+            restrict: "AE",
+            template: "",
+            scope: true,
+            link: function(scope, element, attr, ctrl) {
+                var attrs = JSON.parse(attr.eehNavigationAltDynamicDirective);
+                var templ = "<div " + attrs.altDirective + '  iconClass=" ' + attrs.iconClass + '"  text=" ' + attrs.text + ' " ></div>';
+                var template = angular.element(templ);
+                element.append(template);
+                $compile(template)(scope);
+            }
+        };
+    } ]);
     var NavbarDirective = function($window, $rootScope, eehNavigation) {
         return {
             restrict: "AE",

@@ -1,5 +1,23 @@
 'use strict';
 
+// custom directive to add dynamic directives from menu settings
+angular.module('eehNavigation').directive('eehNavigationAltDynamicDirective', ['$compile', function($compile){
+    return {
+        restrict: 'AE',
+        template: '',
+        scope: true,
+        link: function (scope, element, attr, ctrl) {
+
+            var attrs = JSON.parse(attr.eehNavigationAltDynamicDirective); // getting attrs from menu item
+            var templ = '<div ' + attrs.altDirective + '  iconClass=" ' + attrs.iconClass + '"  text=" ' + attrs.text + ' " ></div>'
+            var template = angular.element(templ); // creating new element
+
+            element.append(template); // initiating template + directive from attr
+            $compile(template)(scope);
+        }   // link
+    };
+}]);
+
 /**
  * @ngdoc directive
  * @name eeh-navigation-navbar

@@ -128,6 +128,11 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "</nav>\n" +
     "\n" +
     "<script type=\"text/ng-template\" id=\"template/eeh-navigation/navbar-menu-item.html\">\n" +
+    "\n" +
+    "    <!-- in case there is a dynamic directive instead of menu point -->\n" +
+    "    <div ng-if=\"item.altDirective\" eeh-navigation-alt-dynamic-directive=\"{{item}}\"></div>\n" +
+    "\n" +
+    "\n" +
     "    <p ng-if=\"item.isReadOnly\" class=\"navbar-text\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </p>\n" +
