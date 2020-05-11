@@ -73,37 +73,43 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                     $rootScope.$broadcast("menuCollapseStatus", true);
                   }
                 // removes active class of elements
-                var v = document.getElementsByClassName("sidebar-active-collapsed");
-                var v2 = document.getElementsByClassName("sidebar-active-parent");                   
-                if (v.length > 0) v[0].className = "";
-                if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
+                // var v = document.getElementsByClassName("sidebar-active-collapsed");
+                // var v2 = document.getElementsByClassName("sidebar-active-parent");                   
+                // if (v.length > 0) v[0].className = "";
+                // if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
+
+                angular.forEach(menuItems(), function(menuItem) {
+                    menuItem.activeNod = false;
+                });
+                elem.activeNod = true;
+                $rootScope.$broadcast("menuStateChanged", scope.sidebarIsCollapsed);
                     
                 // if collapsed, collapses side-panel after press + sets class to active element
                 if(scope.sidebarIsCollapsed) {
                     if(scope.compact) scope.notCollapsed = []; //works only if "compact" is true
-                    $timeout(function() { // needs timeout to set current active element class
-                        var t = document.getElementsByClassName('leaf active');
-                        if(t.length>0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
-                    }, 100);
+                    // $timeout(function() { // needs timeout to set current active element class
+                    //     var t = document.getElementsByClassName('leaf active');
+                    //     if(t.length>0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
+                    // }, 100);
                     // to memorize the non-collapsed elements, and to collapse after press
                     angular.forEach(menuItems(), function(menuItem) {
                         if(!menuItem.isCollapsed) scope.notCollapsed.push(menuItem);
                         menuItem.isCollapsed = true;
                     });    
                 }
-                else {
-                    $timeout(function() {
-                        var t = document.getElementsByClassName("leaf active"); // setting black font for parent element
-                        if (t.length > 0 && t[0].parentElement.parentElement.children[0].tagName === "A") 
-                                t[0].parentElement.parentElement.children[0].className = "sidebar-active-parent";
-                    }, 100);
-                }
+                // else {
+                //     $timeout(function() {
+                //         var t = document.getElementsByClassName("leaf active"); // setting black font for parent element
+                //         if (t.length > 0 && t[0].parentElement.parentElement.children[0].tagName === "A") 
+                //                 t[0].parentElement.parentElement.children[0].className = "sidebar-active-parent";
+                //     }, 100);
+                // }
             };
 
             // for leaving only 1 menu point opened, while rest are closed
             scope.collapseSidebar = function(elem) {
-                var v2 = document.getElementsByClassName("sidebar-active-parent");
-                if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
+                // var v2 = document.getElementsByClassName("sidebar-active-parent");
+                // if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
                 var isCol = elem.isCollapsed, parent = null;
 
                 // added catching parent - for 3-level menu
@@ -212,11 +218,12 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
 
             scope.toggleSidebarTextCollapse = function () {
                 scope.sidebarIsCollapsed = !scope.sidebarIsCollapsed;
+                $rootScope.$broadcast("menuSidebarChanged", scope.sidebarIsCollapsed);
                 // when collapsing the sidebar..
                 if(scope.sidebarIsCollapsed) {
                     // sets the active element
-                    var t = document.getElementsByClassName('leaf active');
-                    if(t.length>0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
+                    // var t = document.getElementsByClassName('leaf active');
+                    // if(t.length>0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
                     // saves the opened one(s)
                     angular.forEach(menuItems(), function(menuItem) {
                         if(!menuItem.isCollapsed){
@@ -227,11 +234,11 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 // when opening the sidebar
                 else {
                     // removes active elements
-                    var t = document.getElementsByClassName('sidebar-active-collapsed');
-                    if(t.length>0) t[0].className = "";
-                    angular.forEach(menuItems(), function(menuItem) {
-                        menuItem.className = '';
-                    });
+                    // var t = document.getElementsByClassName('sidebar-active-collapsed');
+                    // if(t.length>0) t[0].className = "";
+                    // angular.forEach(menuItems(), function(menuItem) {
+                    //     menuItem.className = '';
+                    // });
                     // uncollapses the opened elements
                     scope.notCollapsed.map(function(item){
                         item.isCollapsed = false;

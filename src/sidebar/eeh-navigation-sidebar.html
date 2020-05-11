@@ -61,6 +61,7 @@
     <a ng-if="!item.state && item.hasChildren()"
        ng-click="collapseSidebar(item)"
        ng-class="item.className"
+       eeh-navigation-alt-parent="item"
        ng-attr-title="{{item.description ? item.description : item.text | translate}}">
         <span eeh-navigation-menu-item-content="item"></span>
         <span class="navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}"

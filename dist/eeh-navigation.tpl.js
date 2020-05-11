@@ -264,6 +264,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "    <a ng-if=\"!item.state && item.hasChildren()\"\n" +
     "       ng-click=\"collapseSidebar(item)\"\n" +
     "       ng-class=\"item.className\"\n" +
+    "       eeh-navigation-alt-parent=\"item\"\n" +
     "       ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "        <span class=\"navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}\"\n" +

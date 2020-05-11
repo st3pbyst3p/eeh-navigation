@@ -7,7 +7,7 @@
     SidebarDirective.$inject = [ "$window", "eehNavigation", "$filter", "$rootScope", "$timeout" ];
     angular.module("eehNavigation", [ "pascalprecht.translate" ]);
     "use strict";
-    angular.module("eehNavigation").directive("eehNavigationActiveMenuItem", ActiveMenuItemDirective);
+    angular.module("eehNavigation").directive("eehNavigationActiveMenuItem", ActiveMenuItemDirective).directive("eehNavigationAltParent", AltParentDirective);
     function isMenuItemActive(menuItem, $state) {
         if (!menuItem.hasChildren()) {
             return false;
@@ -18,6 +18,21 @@
                 return true;
             }
             if (isMenuItemActive(children[i], $state)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function hasActiveChildren(menuItem) {
+        if (!menuItem.hasChildren()) {
+            return false;
+        }
+        var children = menuItem.children();
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].activeNod) {
+                return true;
+            }
+            if (hasActiveChildren(children[i])) {
                 return true;
             }
         }
@@ -36,6 +51,30 @@
                 };
                 scope.$on("$stateChangeSuccess", checkIsActive);
                 checkIsActive();
+            }
+        };
+    }
+    function AltParentDirective() {
+        return {
+            restrict: "A",
+            scope: {
+                menuItem: "=eehNavigationAltParent"
+            },
+            link: function(scope) {
+                function checkActiveChild($event, isCollapsed) {
+                    scope.menuItem.className = "";
+                    var setClass = "sidebar-active-parent";
+                    if (isCollapsed) setClass = "sidebar-active-collapsed";
+                    if (hasActiveChildren(scope.menuItem)) {
+                        scope.menuItem.className = setClass;
+                    } else scope.menuItem.className = "";
+                }
+                scope.$on("menuStateChanged", function($event, isCollapsed) {
+                    checkActiveChild($event, isCollapsed);
+                });
+                scope.$on("menuSidebarChanged", function($event, isCollapsed) {
+                    checkActiveChild($event, isCollapsed);
+                });
             }
         };
     }
@@ -372,30 +411,20 @@
                     if (window.innerWidth <= 800 && window.innerHeight <= 800) {
                         $rootScope.$broadcast("menuCollapseStatus", true);
                     }
-                    var v = document.getElementsByClassName("sidebar-active-collapsed");
-                    var v2 = document.getElementsByClassName("sidebar-active-parent");
-                    if (v.length > 0) v[0].className = "";
-                    if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
+                    angular.forEach(menuItems(), function(menuItem) {
+                        menuItem.activeNod = false;
+                    });
+                    elem.activeNod = true;
+                    $rootScope.$broadcast("menuStateChanged", scope.sidebarIsCollapsed);
                     if (scope.sidebarIsCollapsed) {
                         if (scope.compact) scope.notCollapsed = [];
-                        $timeout(function() {
-                            var t = document.getElementsByClassName("leaf active");
-                            if (t.length > 0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
-                        }, 100);
                         angular.forEach(menuItems(), function(menuItem) {
                             if (!menuItem.isCollapsed) scope.notCollapsed.push(menuItem);
                             menuItem.isCollapsed = true;
                         });
-                    } else {
-                        $timeout(function() {
-                            var t = document.getElementsByClassName("leaf active");
-                            if (t.length > 0 && t[0].parentElement.parentElement.children[0].tagName === "A") t[0].parentElement.parentElement.children[0].className = "sidebar-active-parent";
-                        }, 100);
                     }
                 };
                 scope.collapseSidebar = function(elem) {
-                    var v2 = document.getElementsByClassName("sidebar-active-parent");
-                    if (v2.length > 0 && v2[0].tagName === "A") v2[0].className = "";
                     var isCol = elem.isCollapsed, parent = null;
                     if (scope.compact) angular.forEach(menuItems(), function(menuItem) {
                         if (menuItem.hasChildren()) {
@@ -492,20 +521,14 @@
                 }, true);
                 scope.toggleSidebarTextCollapse = function() {
                     scope.sidebarIsCollapsed = !scope.sidebarIsCollapsed;
+                    $rootScope.$broadcast("menuSidebarChanged", scope.sidebarIsCollapsed);
                     if (scope.sidebarIsCollapsed) {
-                        var t = document.getElementsByClassName("leaf active");
-                        if (t.length > 0) t[0].parentElement.parentElement.className = "sidebar-active-collapsed";
                         angular.forEach(menuItems(), function(menuItem) {
                             if (!menuItem.isCollapsed) {
                                 scope.notCollapsed.push(menuItem);
                             }
                         });
                     } else {
-                        var t = document.getElementsByClassName("sidebar-active-collapsed");
-                        if (t.length > 0) t[0].className = "";
-                        angular.forEach(menuItems(), function(menuItem) {
-                            menuItem.className = "";
-                        });
                         scope.notCollapsed.map(function(item) {
                             item.isCollapsed = false;
                         });

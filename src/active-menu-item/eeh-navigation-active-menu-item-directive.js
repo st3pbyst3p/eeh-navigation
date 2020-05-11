@@ -1,5 +1,7 @@
 'use strict';
-angular.module('eehNavigation').directive('eehNavigationActiveMenuItem', ActiveMenuItemDirective);
+angular.module('eehNavigation')
+    .directive('eehNavigationActiveMenuItem', ActiveMenuItemDirective)
+    .directive('eehNavigationAltParent', AltParentDirective);
 
 function isMenuItemActive(menuItem, $state) {
     if (!menuItem.hasChildren()) {
@@ -22,6 +24,22 @@ function isMenuItemActive(menuItem, $state) {
     return false;
 }
 
+function hasActiveChildren(menuItem) {
+    if (!menuItem.hasChildren()) {
+        return false;
+    }
+    var children = menuItem.children();
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].activeNod) {
+            return true;
+        }
+        if (hasActiveChildren(children[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /** @ngInject */
 function ActiveMenuItemDirective($state) {
     return {
@@ -36,6 +54,32 @@ function ActiveMenuItemDirective($state) {
             };
             scope.$on('$stateChangeSuccess', checkIsActive);
             checkIsActive();
+        }
+    };
+}
+
+function AltParentDirective() {
+    return {
+        restrict: "A",
+        scope: {
+            menuItem: "=eehNavigationAltParent"
+        },
+        link: function(scope) {
+            function checkActiveChild($event, isCollapsed) {
+                scope.menuItem.className = "";
+                var setClass = "sidebar-active-parent";
+                if (isCollapsed) setClass = "sidebar-active-collapsed";
+                
+                if (hasActiveChildren(scope.menuItem)) {
+                    scope.menuItem.className = setClass;
+                } else scope.menuItem.className = "";
+            }
+            scope.$on("menuStateChanged", function($event, isCollapsed){
+                checkActiveChild($event, isCollapsed)
+            });
+            scope.$on("menuSidebarChanged", function($event, isCollapsed){
+                checkActiveChild($event, isCollapsed)
+            });
         }
     };
 }
