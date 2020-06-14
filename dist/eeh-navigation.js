@@ -321,6 +321,11 @@
                 };
                 scope.$watch(eehNavigation.menuItems, scope.refresh, true);
                 scope.$on("eehNavItemsRefresh", scope.refresh);
+                scope.menuClick = function(menuItem) {
+                    if (window.innerWidth <= 800 && !menuItem.hasChildren()) {
+                        $rootScope.$broadcast("menuCollapseStatus", true);
+                    }
+                };
                 var windowElement = angular.element($window);
                 windowElement.bind("resize", function() {
                     scope.$apply();
@@ -408,7 +413,7 @@
                 scope.compact = true;
                 scope.notCollapsed = [];
                 scope.changeTitle = function(elem) {
-                    if (window.innerWidth <= 800 && window.innerHeight <= 800) {
+                    if (window.innerWidth <= 800 && !elem.hasChildren()) {
                         $rootScope.$broadcast("menuCollapseStatus", true);
                     }
                     angular.forEach(menuItems(), function(menuItem) {

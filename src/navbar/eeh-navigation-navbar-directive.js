@@ -75,6 +75,12 @@ var NavbarDirective = function ($window, $rootScope, eehNavigation) {
             // adaugat event ca sa faca refresh in caz ca se modifica elementele
             scope.$on('eehNavItemsRefresh', scope.refresh);
 
+            scope.menuClick = function(menuItem) {
+                if(window.innerWidth <= 800 && !menuItem.hasChildren()) {
+                    $rootScope.$broadcast("menuCollapseStatus", true);
+                }
+            }
+
             var windowElement = angular.element($window);
             windowElement.bind('resize', function () {
                 scope.$apply();

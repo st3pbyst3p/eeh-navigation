@@ -68,10 +68,10 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
             scope.notCollapsed = []; // the opened elements
             scope.changeTitle = function(elem){
                 // document.title = $filter("translate")(elem.text) + " : " + $rootScope.CompanyName; // gets company name from settings
-                // collapses menu on click, if it-s a mobile device
-                if(window.innerWidth <= 800 && window.innerHeight <= 800) {
+                // collapses menu on click, if it-s a mobile device + if no children
+                if(window.innerWidth <= 800 && !elem.hasChildren()) {
                     $rootScope.$broadcast("menuCollapseStatus", true);
-                  }
+                }
                 // removes active class of elements
                 // var v = document.getElementsByClassName("sidebar-active-collapsed");
                 // var v2 = document.getElementsByClassName("sidebar-active-parent");                   

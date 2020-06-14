@@ -45,20 +45,20 @@
 <script type="text/ng-template" id="template/eeh-navigation/navbar-menu-item.html">
 
     <!-- in case there is a dynamic directive instead of menu point -->
-    <div ng-if="item.altDirective" eeh-navigation-alt-dynamic-directive="{{item}}"></div>
+    <div ng-click="menuClick(item)" ng-if="item.altDirective" eeh-navigation-alt-dynamic-directive="{{item}}"></div>
 
 
     <p ng-if="item.isReadOnly" class="navbar-text">
         <span eeh-navigation-menu-item-content="item"></span>
     </p>
-    <span ng-if="item.ngInclude" ng-include="item.ngInclude"></span>
-    <a ng-if="!item.isDivider && item.state" ui-sref="{{ item.state }}">
+    <span ng-click="menuClick(item)" ng-if="item.ngInclude" ng-include="item.ngInclude"></span>
+    <a ng-click="menuClick(item)" ng-if="!item.isDivider && item.state" ui-sref="{{ item.state }}">
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
-    <a ng-if="item.click" ng-click="item.click()">
+    <a ng-if="item.click" ng-click="item.click(); menuClick(item);">
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
-    <a ng-if="item.href" ng-href="{{item.href}}" target="{{item.target ? item.target : '_self'}}">
+    <a ng-if="item.href" ng-click="menuClick(item)" ng-href="{{item.href}}" target="{{item.target ? item.target : '_self'}}">
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
     <a ng-if="item.hasChildren()" uib-dropdown-toggle="">

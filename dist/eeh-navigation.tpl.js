@@ -130,20 +130,20 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "<script type=\"text/ng-template\" id=\"template/eeh-navigation/navbar-menu-item.html\">\n" +
     "\n" +
     "    <!-- in case there is a dynamic directive instead of menu point -->\n" +
-    "    <div ng-if=\"item.altDirective\" eeh-navigation-alt-dynamic-directive=\"{{item}}\"></div>\n" +
+    "    <div ng-click=\"menuClick(item)\" ng-if=\"item.altDirective\" eeh-navigation-alt-dynamic-directive=\"{{item}}\"></div>\n" +
     "\n" +
     "\n" +
     "    <p ng-if=\"item.isReadOnly\" class=\"navbar-text\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </p>\n" +
-    "    <span ng-if=\"item.ngInclude\" ng-include=\"item.ngInclude\"></span>\n" +
-    "    <a ng-if=\"!item.isDivider && item.state\" ui-sref=\"{{ item.state }}\">\n" +
+    "    <span ng-click=\"menuClick(item)\" ng-if=\"item.ngInclude\" ng-include=\"item.ngInclude\"></span>\n" +
+    "    <a ng-click=\"menuClick(item)\" ng-if=\"!item.isDivider && item.state\" ui-sref=\"{{ item.state }}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
-    "    <a ng-if=\"item.click\" ng-click=\"item.click()\">\n" +
+    "    <a ng-if=\"item.click\" ng-click=\"item.click(); menuClick(item);\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
-    "    <a ng-if=\"item.href\" ng-href=\"{{item.href}}\" target=\"{{item.target ? item.target : '_self'}}\">\n" +
+    "    <a ng-if=\"item.href\" ng-click=\"menuClick(item)\" ng-href=\"{{item.href}}\" target=\"{{item.target ? item.target : '_self'}}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
     "    <a ng-if=\"item.hasChildren()\" uib-dropdown-toggle=\"\">\n" +
