@@ -216,8 +216,9 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 }  
             }, true);
 
-            scope.toggleSidebarTextCollapse = function () {
-                scope.sidebarIsCollapsed = !scope.sidebarIsCollapsed;
+            scope.toggleSidebarTextCollapse = function(status) {
+                if(status) scope.sidebarIsCollapsed = status;
+                else scope.sidebarIsCollapsed = !scope.sidebarIsCollapsed;
                 $rootScope.$broadcast("menuSidebarChanged", scope.sidebarIsCollapsed);
                 // when collapsing the sidebar..
                 if(scope.sidebarIsCollapsed) {
@@ -247,6 +248,9 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 }
                 setTextCollapseState();
             };
+            scope.$on("setSidebarCollapsed", function(event, status){
+                scope.toggleSidebarTextCollapse(status);
+            });
 
             function setTextCollapseState() {
                 var sidebarMenuItems = angular.element(document.querySelectorAll('ul.sidebar-nav:not(.sidebar-nav-nested) > li > a > span'));
