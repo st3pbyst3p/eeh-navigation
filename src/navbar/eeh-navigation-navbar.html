@@ -26,6 +26,7 @@
                     class="{{ item.itemClass }}"
                     uib-dropdown
                     ui-sref-active-eq="active"
+                    ng-attr-title="{{item.description ? item.description : item.text | translate}}"
                     eeh-navigation-active-menu-item="item">
                 </li>
             </ul>
@@ -36,6 +37,7 @@
                     ng-if="item._isVisible()"
                     uib-dropdown
                     ui-sref-active-eq="active"
+                    ng-attr-title="{{item.description ? item.description : item.text | translate}}"
                     eeh-navigation-active-menu-item="item"></li>
             </ul>
         </div>
@@ -72,6 +74,7 @@
             ng-class="{'divider': item.isDivider}"
             ng-include="'template/eeh-navigation/navbar-menu-item.html'"
             ng-if="item._isVisible()"
+            ng-attr-title="{{item.description ? item.description : item.text | translate}}"
             ui-sref-active-eq="active"></li>
     </ul>
 </script>

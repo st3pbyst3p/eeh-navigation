@@ -111,6 +111,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                    class=\"{{ item.itemClass }}\"\n" +
     "                    uib-dropdown\n" +
     "                    ui-sref-active-eq=\"active\"\n" +
+    "                    ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\n" +
     "                    eeh-navigation-active-menu-item=\"item\">\n" +
     "                </li>\n" +
     "            </ul>\n" +
@@ -121,6 +122,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                    ng-if=\"item._isVisible()\"\n" +
     "                    uib-dropdown\n" +
     "                    ui-sref-active-eq=\"active\"\n" +
+    "                    ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\n" +
     "                    eeh-navigation-active-menu-item=\"item\"></li>\n" +
     "            </ul>\n" +
     "        </div>\n" +
@@ -157,6 +159,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "            ng-class=\"{'divider': item.isDivider}\"\n" +
     "            ng-include=\"'template/eeh-navigation/navbar-menu-item.html'\"\n" +
     "            ng-if=\"item._isVisible()\"\n" +
+    "            ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\n" +
     "            ui-sref-active-eq=\"active\"></li>\n" +
     "    </ul>\n" +
     "</script>\n"
