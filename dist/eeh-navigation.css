@@ -24,13 +24,10 @@
 .eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > a {
   padding-left: 30px;
 }
-.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > .divider {
-  margin-left: 30px;
-}
 .eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > ul > li > a {
   padding-left: 45px;
 }
-.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > ul > li > .divider {
+.eeh-navigation-sidebar > .navbar-collapse > ul.sidebar-nav > li > ul > li > ul > .divider {
   margin-left: 45px;
 }
 .eeh-navigation-sidebar .navbar-default > .active {

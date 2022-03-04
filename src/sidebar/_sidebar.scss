@@ -20,14 +20,11 @@
       > li > ul > li > a {
         padding-left: $sidebar-menu-item-padding-left * 2;
       }
-      > li > ul > li > .divider {
-        margin-left: $sidebar-menu-item-padding-left * 2;
-      }
       /* Indent third level menu items */
       > li > ul > li > ul > li > a {
         padding-left: $sidebar-menu-item-padding-left * 3;
       }
-      > li > ul > li > ul > li > .divider {
+      > li > ul > li > ul > .divider {
         margin-left: $sidebar-menu-item-padding-left * 3;
       }
     }
