@@ -286,6 +286,34 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 }
             }
 
+            // catching search bar query changes
+            scope.$on('altEehSearchContainerChanged', function (event, params) {
+                if(!params || !params.query) {
+                    scope.refresh();
+                }
+                else {
+                    scope.sidebarMenuItems = scope.altFilterSearchedMenuItems(eehNavigation.menuItemTree(scope.menuName), params.query);
+                }
+            });
+
+            // function to filter menu items based on search term
+            scope.altFilterSearchedMenuItems = function(targetItem, query) {
+                var searchResults = [];
+
+                targetItem.map(function(menuItem){
+                    if(menuItem.hasChildren()) {
+                        var tempResults = scope.altFilterSearchedMenuItems(menuItem.children(), query);
+                        if(tempResults.length) {
+                            searchResults = searchResults.concat(tempResults);
+                        }
+                    }
+                    else if(menuItem.text && !menuItem.isDivider && $filter('translate')(menuItem.text).toLowerCase().includes(query.toLowerCase())) {
+                        searchResults.push(menuItem);
+                    }
+                });
+
+                return searchResults;
+            }
 
             /**
              * $includeContentLoaded is emitted when ng-include templates are finished loading.

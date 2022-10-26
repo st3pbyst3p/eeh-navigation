@@ -1,8 +1,8 @@
 'use strict';
-angular.module('eehNavigation').directive('eehNavigationSearchInput', SearchInputDirective);
+angular.module('eehNavigation').directive('eehNavigationSearchInput', ['eehNavigation', '$timeout', SearchInputDirective]);
 
 /** @ngInject */
-function SearchInputDirective(eehNavigation) {
+function SearchInputDirective(eehNavigation, $timeout) {
     return {
         restrict: 'AE',
         transclude: true,
@@ -20,6 +20,18 @@ function SearchInputDirective(eehNavigation) {
             scope.iconBaseClass = function () {
                 return eehNavigation.iconBaseClass();
             };
+            // altChanges ----------------------------------------------------------------------
+            var dly = null;
+            // catching search bar query changes
+            scope.$watch(function () {return scope.model.query;}, function (newValue, oldValue) {
+                if(newValue !== oldValue) {
+                    $timeout.cancel(dly);
+                    dly = $timeout(function () {
+                        scope.$emit('altEehSearchContainerChanged', { query: newValue });
+                    }, 200);
+                }
+            });
+            // endlink
         }
     };
 }

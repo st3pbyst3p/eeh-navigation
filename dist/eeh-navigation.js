@@ -3,7 +3,7 @@
     ActiveMenuItemDirective.$inject = [ "$state" ];
     MenuItemContentDirective.$inject = [ "eehNavigation" ];
     MenuDirective.$inject = [ "eehNavigation" ];
-    SearchInputDirective.$inject = [ "eehNavigation" ];
+    SearchInputDirective.$inject = [ "eehNavigation", "$timeout" ];
     SidebarDirective.$inject = [ "$window", "eehNavigation", "$filter", "$rootScope", "$timeout" ];
     angular.module("eehNavigation", [ "pascalprecht.translate" ]);
     "use strict";
@@ -357,8 +357,8 @@
     };
     angular.module("eehNavigation").directive("eehNavigationNavbar", [ "$window", "$rootScope", "eehNavigation", NavbarDirective ]);
     "use strict";
-    angular.module("eehNavigation").directive("eehNavigationSearchInput", SearchInputDirective);
-    function SearchInputDirective(eehNavigation) {
+    angular.module("eehNavigation").directive("eehNavigationSearchInput", [ "eehNavigation", "$timeout", SearchInputDirective ]);
+    function SearchInputDirective(eehNavigation, $timeout) {
         return {
             restrict: "AE",
             transclude: true,
@@ -376,6 +376,19 @@
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
                 };
+                var dly = null;
+                scope.$watch(function() {
+                    return scope.model.query;
+                }, function(newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        $timeout.cancel(dly);
+                        dly = $timeout(function() {
+                            scope.$emit("altEehSearchContainerChanged", {
+                                query: newValue
+                            });
+                        }, 200);
+                    }
+                });
             }
         };
     }
@@ -577,6 +590,27 @@
                         });
                     }
                 }
+                scope.$on("altEehSearchContainerChanged", function(event, params) {
+                    if (!params || !params.query) {
+                        scope.refresh();
+                    } else {
+                        scope.sidebarMenuItems = scope.altFilterSearchedMenuItems(eehNavigation.menuItemTree(scope.menuName), params.query);
+                    }
+                });
+                scope.altFilterSearchedMenuItems = function(targetItem, query) {
+                    var searchResults = [];
+                    targetItem.map(function(menuItem) {
+                        if (menuItem.hasChildren()) {
+                            var tempResults = scope.altFilterSearchedMenuItems(menuItem.children(), query);
+                            if (tempResults.length) {
+                                searchResults = searchResults.concat(tempResults);
+                            }
+                        } else if (menuItem.text && !menuItem.isDivider && $filter("translate")(menuItem.text).toLowerCase().includes(query.toLowerCase())) {
+                            searchResults.push(menuItem);
+                        }
+                    });
+                    return searchResults;
+                };
                 scope.$on("$includeContentLoaded", function() {
                     setTextCollapseState();
                 });

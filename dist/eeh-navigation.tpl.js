@@ -193,9 +193,13 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                   placeholder=\"{{'Search'|translate}}\"\n" +
     "                   ng-model=\"model.query\">\n" +
     "        <span class=\"input-group-btn\" ng-if=\"!isCollapsed\">\n" +
-    "            <button class=\"btn btn-default\">\n" +
-    "                <span class=\"icon-fw {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
+    "            <button class=\"btn btn-default\" ng-disabled=\"!model.query\" ng-click=\"model.query = ''\">\n" +
+    "                <span style=\"margin: 0;\" class=\"glyphicon glyphicon-remove remove-icon {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
     "            </button>\n" +
+    "            <!-- old -->\n" +
+    "            <!-- <button class=\"btn btn-default\">\n" +
+    "                <span class=\"icon-fw {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
+    "            </button> -->\n" +
     "        </span>\n" +
     "        </div>\n" +
     "    </form>\n" +
@@ -209,16 +213,23 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "    <!-- is set to collapse the parent container -->\n" +
     "    <div class=\"navbar-collapse\" >\n" +
     "        <ul class=\"nav sidebar-nav\">\n" +
-    "            <li class=\"sidebar-search\" ng-if=\"searchInputIsVisible\">\n" +
+    "            <!-- <li class=\"sidebar-search\" ng-if=\"searchInputIsVisible\">\n" +
     "                <eeh-navigation-search-input class=\"sidebar-search-input\"\n" +
     "                                             icon-class=\"searchInputIconClass\"\n" +
     "                                             submit=\"searchInputSubmit\"\n" +
     "                                             is-collapsed=\"sidebarIsCollapsed\"></eeh-navigation-search-input>\n" +
-    "            </li>\n" +
+    "            </li> -->\n" +
     "            <!-- duplicate the toggle-sidebar-btn -->\n" +
     "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
-    "                <a>\n" +
+    "                <a class=\"alt-eeh-search-container\">\n" +
     "                    <span ng-click=\"toggleSidebarTextCollapse()\" class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                    <eeh-navigation-search-input \n" +
+    "                        ng-if=\"searchInputIsVisible && !sidebarIsCollapsed\"\n" +
+    "                        class=\"sidebar-search-input\"\n" +
+    "                        icon-class=\"searchInputIconClass\"\n" +
+    "                        submit=\"searchInputSubmit\"\n" +
+    "                        is-collapsed=\"sidebarIsCollapsed\">\n" +
+    "                    </eeh-navigation-search-input>\n" +
     "                    <span ng-hide=\"sidebarIsCollapsed\" ng-click=\"minimizeFn()\" class=\"minimize pull-right\" ng-class=\"returnClass()\"></span>\n" +
     "                </a>\n" +
     "            </li>\n" +
@@ -262,7 +273,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "    <a ng-if=\"item.href\" ng-href=\"{{item.href}}\" target=\"{{item.target ? item.target : '_self'}}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
-    "    <!-- aici trebuie de schimbat la ng-click dupa modelul: se cheama functia ng-click=\"collapseSidebar(item)\" -->\n" +
+    "    \n" +
     "    <!-- checks whether there is a description or not and puts it in the title -->\n" +
     "    <a ng-if=\"!item.state && item.hasChildren()\"\n" +
     "       ng-click=\"collapseSidebar(item)\"\n" +

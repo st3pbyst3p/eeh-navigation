@@ -1,5 +1,11 @@
 @import "../variables";
 
+.alt-eeh-search-container {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .eeh-padding {
   padding-right: 0; 
   padding-left: 0;
