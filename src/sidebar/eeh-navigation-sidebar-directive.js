@@ -175,7 +175,7 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
             };
 
             scope.refresh = function () {
-                if (angular.isUndefined(scope.menuName)) {
+                if (angular.isUndefined(scope.menuName) || scope.altSearchContainerQuery) {
                     return;
                 }
                 scope.sidebarMenuItems = eehNavigation.menuItemTree(scope.menuName);
@@ -287,11 +287,14 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
             }
 
             // catching search bar query changes
+            scope.altSearchContainerQuery = null;
             scope.$on('altEehSearchContainerChanged', function (event, params) {
                 if(!params || !params.query) {
+                    scope.altSearchContainerQuery = null;
                     scope.refresh();
                 }
                 else {
+                    scope.altSearchContainerQuery = params.query;
                     scope.sidebarMenuItems = scope.altFilterSearchedMenuItems(eehNavigation.menuItemTree(scope.menuName), params.query);
                 }
             });

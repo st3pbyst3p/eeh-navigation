@@ -6,7 +6,12 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "      class=\"menu-item-icon icon-fw {{ iconBaseClass() }} {{ menuItem.iconClass}}\"></span>\n" +
     "<span ng-if=\"menuItem.text\"\n" +
     "      class=\"menu-item-text\" translate=\"{{ menuItem.text }}\"></span>\n" +
-    "<span ng-if=\"menuItem._ngBindHtml()\" ng-bind-html=\"menuItem._ngBindHtml()\"></span>\n"
+    "<span ng-if=\"menuItem._ngBindHtml()\" ng-bind-html=\"menuItem._ngBindHtml()\"></span>\n" +
+    "<!-- add/remove to favorites icon -->\n" +
+    "<i class=\"fa fa-star-o pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && !menuItem.isFavorite && !menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></i>\n" +
+    "<i class=\"fa fa-star pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #337ab7;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && menuItem.isFavorite && !menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></i>\n" +
+    "<span class=\"menu-item-icon icon-fw fa fa-star-o pull-right\" style=\"font-size: 15px;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && !menuItem.isFavorite && menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></span>\n" +
+    "<span class=\"menu-item-icon icon-fw fa fa-star pull-right\" style=\"font-size: 15px;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && menuItem.isFavorite && menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></span>"
   );
 
 

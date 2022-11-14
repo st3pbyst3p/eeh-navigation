@@ -1,7 +1,7 @@
 (function(exports, global) {
     "use strict";
     ActiveMenuItemDirective.$inject = [ "$state" ];
-    MenuItemContentDirective.$inject = [ "eehNavigation" ];
+    MenuItemContentDirective.$inject = [ "eehNavigation", "$rootScope" ];
     MenuDirective.$inject = [ "eehNavigation" ];
     SearchInputDirective.$inject = [ "eehNavigation", "$timeout" ];
     SidebarDirective.$inject = [ "$window", "eehNavigation", "$filter", "$rootScope", "$timeout" ];
@@ -206,8 +206,8 @@
         return angular.isDefined(this) ? this._menuItems : {};
     };
     "use strict";
-    angular.module("eehNavigation").directive("eehNavigationMenuItemContent", MenuItemContentDirective);
-    function MenuItemContentDirective(eehNavigation) {
+    angular.module("eehNavigation").directive("eehNavigationMenuItemContent", [ "eehNavigation", "$rootScope", MenuItemContentDirective ]);
+    function MenuItemContentDirective(eehNavigation, $rootScope) {
         return {
             restrict: "A",
             scope: {
@@ -217,6 +217,13 @@
             link: function(scope) {
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
+                };
+                scope.altCanBeFavorites = function(menuItem) {
+                    return !menuItem.hasChildren() && menuItem.menuItemName.search("sb.") === 0;
+                };
+                scope.altManageFavorites = function(menuItem) {
+                    if (!menuItem.isFavorite) menuItem.isFavorite = true; else menuItem.isFavorite = !menuItem.isFavorite;
+                    $rootScope.$broadcast("altMenuItemFavoritesAction", menuItem);
                 };
             }
         };
@@ -502,7 +509,7 @@
                     return eehNavigation.menuItems();
                 };
                 scope.refresh = function() {
-                    if (angular.isUndefined(scope.menuName)) {
+                    if (angular.isUndefined(scope.menuName) || scope.altSearchContainerQuery) {
                         return;
                     }
                     scope.sidebarMenuItems = eehNavigation.menuItemTree(scope.menuName);
@@ -590,10 +597,13 @@
                         });
                     }
                 }
+                scope.altSearchContainerQuery = null;
                 scope.$on("altEehSearchContainerChanged", function(event, params) {
                     if (!params || !params.query) {
+                        scope.altSearchContainerQuery = null;
                         scope.refresh();
                     } else {
+                        scope.altSearchContainerQuery = params.query;
                         scope.sidebarMenuItems = scope.altFilterSearchedMenuItems(eehNavigation.menuItemTree(scope.menuName), params.query);
                     }
                 });
