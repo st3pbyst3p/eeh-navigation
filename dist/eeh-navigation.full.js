@@ -607,6 +607,9 @@
                         scope.sidebarMenuItems = scope.altFilterSearchedMenuItems(eehNavigation.menuItemTree(scope.menuName), params.query);
                     }
                 });
+                scope.$on("altMenuItemFavoritesRemoved", function(event, menuItem) {
+                    menuItems()[menuItem.code].isFavorite = false;
+                });
                 scope.altFilterSearchedMenuItems = function(targetItem, query) {
                     var searchResults = [];
                     targetItem.map(function(menuItem) {

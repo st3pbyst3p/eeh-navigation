@@ -299,6 +299,11 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 }
             });
 
+            // catching deleting element from favorites
+            scope.$on('altMenuItemFavoritesRemoved', function (event, menuItem) {
+                menuItems()[menuItem.code].isFavorite = false;
+            });
+
             // function to filter menu items based on search term
             scope.altFilterSearchedMenuItems = function(targetItem, query) {
                 var searchResults = [];
