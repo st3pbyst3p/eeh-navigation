@@ -16,7 +16,7 @@ function MenuItemContentDirective(eehNavigation, $rootScope) {
 
             // function to detect whether a menuItem can be added to favorites or not
             scope.altCanBeFavorites = function(menuItem) {
-                return !menuItem.hasChildren() && menuItem.menuItemName.search('sb.') === 0;
+                return !menuItem.hasChildren() && menuItem.menuItemName.search('sb.') === 0 && (menuItem.state && menuItem.state!=='altApp.authenticated.dashboard');
             }
 
             // function to manage add/remove to favorites

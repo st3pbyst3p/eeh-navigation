@@ -219,7 +219,7 @@
                     return eehNavigation.iconBaseClass();
                 };
                 scope.altCanBeFavorites = function(menuItem) {
-                    return !menuItem.hasChildren() && menuItem.menuItemName.search("sb.") === 0;
+                    return !menuItem.hasChildren() && menuItem.menuItemName.search("sb.") === 0 && (menuItem.state && menuItem.state !== "altApp.authenticated.dashboard");
                 };
                 scope.altManageFavorites = function(menuItem) {
                     if (!menuItem.isFavorite) menuItem.isFavorite = true; else menuItem.isFavorite = !menuItem.isFavorite;
