@@ -299,6 +299,19 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 }
             });
 
+            // function to detect whether a menuItem can be added to favorites or not
+            scope.altCanBeFavorites = function(menuItem) {
+                return !menuItem.hasChildren() && menuItem.menuItemName.search('sb.') === 0 && (menuItem.state && menuItem.state!=='altApp.authenticated.dashboard');
+            }
+
+            // function to manage add/remove to favorites
+            scope.altManageFavorites = function(menuItem) {
+                if(!menuItem.isFavorite) menuItem.isFavorite = true;
+                else menuItem.isFavorite = !menuItem.isFavorite;
+
+                $rootScope.$broadcast("altMenuItemFavoritesAction", menuItem);
+            }
+
             // catching deleting element from favorites
             scope.$on('altMenuItemFavoritesRemoved', function (event, menuItem) {
                 menuItems()[menuItem.code].isFavorite = false;

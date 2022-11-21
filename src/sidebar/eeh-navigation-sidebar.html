@@ -54,7 +54,8 @@
         <span eeh-navigation-menu-item-content="item"></span>
     </p>
     <span ng-if="item.ngInclude" ng-include="item.ngInclude"></span>
-    <a ng-if="item.state" ui-sref="{{item.state}}"  ui-sref-opts="{inherit: false}">
+    <!-- lower lvl sidebar element - link with no children -->
+    <a ng-style="altCanBeFavorites(item) ? {'width': 'calc(100% - 22px)', 'float': 'left'} : {}" ng-if="item.state" ui-sref="{{item.state}}"  ui-sref-opts="{inherit: false}">
         <span eeh-navigation-menu-item-content="item"></span>
     </a>
     <a ng-if="item.click" ng-click="item.click()">
@@ -74,6 +75,21 @@
         <span class="navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}"
               ng-class="item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass"></span>
     </a>
+    <!-- add/remove to favorites icon -->
+    <div ng-if="altCanBeFavorites(item)"
+        style="width: 22px;
+            float: right;
+            display: flex;
+            align-items: center;
+            justify-content: end; cursor: pointer;"
+        ng-style="item.iconClass ? {'height': '43px'} : {'height': '33px'}"
+    >
+        <i class="fa fa-star-o pull-right" style="font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;" aria-hidden="true" ng-if="altCanBeFavorites(item) && !item.isFavorite && !item.iconClass" ng-click="altManageFavorites(item)"></i>
+        <i class="fa fa-star pull-right" style="font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && !item.iconClass" ng-click="altManageFavorites(item)"></i>
+        <span class="menu-item-icon icon-fw fa fa-star-o pull-right" style="font-size: 15px; color: #c1c1c1; width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && !item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
+        <span class="menu-item-icon icon-fw fa fa-star pull-right" style="font-size: 15px; color: #c1c1c1; width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
+    </div>
+    <div style="clear: both;"></div>
     <!-- checks whether there is a description or not and puts it in the title -->
     <ul ng-if="!item.state && item.hasChildren()" uib-collapse="item.isCollapsed"
         ng-class="{ 'text-collapsed': sidebarIsCollapsed }"

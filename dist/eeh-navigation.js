@@ -218,13 +218,6 @@
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
                 };
-                scope.altCanBeFavorites = function(menuItem) {
-                    return !menuItem.hasChildren() && menuItem.menuItemName.search("sb.") === 0 && (menuItem.state && menuItem.state !== "altApp.authenticated.dashboard");
-                };
-                scope.altManageFavorites = function(menuItem) {
-                    if (!menuItem.isFavorite) menuItem.isFavorite = true; else menuItem.isFavorite = !menuItem.isFavorite;
-                    $rootScope.$broadcast("altMenuItemFavoritesAction", menuItem);
-                };
             }
         };
     }
@@ -607,6 +600,13 @@
                         scope.sidebarMenuItems = scope.altFilterSearchedMenuItems(eehNavigation.menuItemTree(scope.menuName), params.query);
                     }
                 });
+                scope.altCanBeFavorites = function(menuItem) {
+                    return !menuItem.hasChildren() && menuItem.menuItemName.search("sb.") === 0 && (menuItem.state && menuItem.state !== "altApp.authenticated.dashboard");
+                };
+                scope.altManageFavorites = function(menuItem) {
+                    if (!menuItem.isFavorite) menuItem.isFavorite = true; else menuItem.isFavorite = !menuItem.isFavorite;
+                    $rootScope.$broadcast("altMenuItemFavoritesAction", menuItem);
+                };
                 scope.$on("altMenuItemFavoritesRemoved", function(event, menuItem) {
                     menuItems()[menuItem.code].isFavorite = false;
                 });

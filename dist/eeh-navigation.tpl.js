@@ -8,10 +8,10 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "      class=\"menu-item-text\" translate=\"{{ menuItem.text }}\"></span>\n" +
     "<span ng-if=\"menuItem._ngBindHtml()\" ng-bind-html=\"menuItem._ngBindHtml()\"></span>\n" +
     "<!-- add/remove to favorites icon -->\n" +
-    "<i class=\"fa fa-star-o pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && !menuItem.isFavorite && !menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></i>\n" +
+    "<!-- <i class=\"fa fa-star-o pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && !menuItem.isFavorite && !menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></i>\n" +
     "<i class=\"fa fa-star pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && menuItem.isFavorite && !menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></i>\n" +
     "<span class=\"menu-item-icon icon-fw fa fa-star-o pull-right\" style=\"font-size: 15px;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && !menuItem.isFavorite && menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></span>\n" +
-    "<span class=\"menu-item-icon icon-fw fa fa-star pull-right\" style=\"font-size: 15px; color: #c1c1c1;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && menuItem.isFavorite && menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></span>"
+    "<span class=\"menu-item-icon icon-fw fa fa-star pull-right\" style=\"font-size: 15px; color: #c1c1c1;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && menuItem.isFavorite && menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></span> -->"
   );
 
 
@@ -269,7 +269,8 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </p>\n" +
     "    <span ng-if=\"item.ngInclude\" ng-include=\"item.ngInclude\"></span>\n" +
-    "    <a ng-if=\"item.state\" ui-sref=\"{{item.state}}\"  ui-sref-opts=\"{inherit: false}\">\n" +
+    "    <!-- lower lvl sidebar element - link with no children -->\n" +
+    "    <a ng-style=\"altCanBeFavorites(item) ? {'width': 'calc(100% - 22px)', 'float': 'left'} : {}\" ng-if=\"item.state\" ui-sref=\"{{item.state}}\"  ui-sref-opts=\"{inherit: false}\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
     "    </a>\n" +
     "    <a ng-if=\"item.click\" ng-click=\"item.click()\">\n" +
@@ -289,6 +290,21 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "        <span class=\"navbar-right sidebar-arrow icon-fw {{ iconBaseClass() }}\"\n" +
     "              ng-class=\"item.isCollapsed ? menuItemCollapsedIconClass : menuItemExpandedIconClass\"></span>\n" +
     "    </a>\n" +
+    "    <!-- add/remove to favorites icon -->\n" +
+    "    <div ng-if=\"altCanBeFavorites(item)\"\n" +
+    "        style=\"width: 22px;\n" +
+    "            float: right;\n" +
+    "            display: flex;\n" +
+    "            align-items: center;\n" +
+    "            justify-content: end; cursor: pointer;\"\n" +
+    "        ng-style=\"item.iconClass ? {'height': '43px'} : {'height': '33px'}\"\n" +
+    "    >\n" +
+    "        <i class=\"fa fa-star-o pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(item) && !item.isFavorite && !item.iconClass\" ng-click=\"altManageFavorites(item)\"></i>\n" +
+    "        <i class=\"fa fa-star pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(item) && item.isFavorite && !item.iconClass\" ng-click=\"altManageFavorites(item)\"></i>\n" +
+    "        <span class=\"menu-item-icon icon-fw fa fa-star-o pull-right\" style=\"font-size: 15px; color: #c1c1c1; width: unset;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(item) && !item.isFavorite && item.iconClass\" ng-click=\"altManageFavorites(item)\"></span>\n" +
+    "        <span class=\"menu-item-icon icon-fw fa fa-star pull-right\" style=\"font-size: 15px; color: #c1c1c1; width: unset;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(item) && item.isFavorite && item.iconClass\" ng-click=\"altManageFavorites(item)\"></span>\n" +
+    "    </div>\n" +
+    "    <div style=\"clear: both;\"></div>\n" +
     "    <!-- checks whether there is a description or not and puts it in the title -->\n" +
     "    <ul ng-if=\"!item.state && item.hasChildren()\" uib-collapse=\"item.isCollapsed\"\n" +
     "        ng-class=\"{ 'text-collapsed': sidebarIsCollapsed }\"\n" +
