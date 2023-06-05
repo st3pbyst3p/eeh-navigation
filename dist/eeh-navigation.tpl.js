@@ -227,7 +227,9 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "            <!-- duplicate the toggle-sidebar-btn -->\n" +
     "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
     "                <a class=\"alt-eeh-search-container\" ng-if=\"!sidebarIsCollapsed\">\n" +
-    "                    <span ng-click=\"toggleSidebarTextCollapse()\" class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                    <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\">\n" +
+    "                        <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                    </div>\n" +
     "                    <eeh-navigation-search-input \n" +
     "                        ng-if=\"searchInputIsVisible && !sidebarIsCollapsed\"\n" +
     "                        class=\"sidebar-search-input\"\n" +
@@ -235,7 +237,9 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                        submit=\"searchInputSubmit\"\n" +
     "                        is-collapsed=\"sidebarIsCollapsed\">\n" +
     "                    </eeh-navigation-search-input>\n" +
-    "                    <span ng-hide=\"sidebarIsCollapsed\" ng-click=\"minimizeFn()\" class=\"minimize pull-right\" ng-class=\"returnClass()\"></span>\n" +
+    "                    <div class=\"alt-eeh-span-container\" ng-click=\"minimizeFn()\">\n" +
+    "                        <span ng-hide=\"sidebarIsCollapsed\" class=\"minimize pull-right\" ng-class=\"returnClass()\"></span>\n" +
+    "                    </div>\n" +
     "                </a>\n" +
     "                <a ng-if=\"sidebarIsCollapsed\" ng-click=\"toggleSidebarTextCollapse()\">\n" +
     "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +

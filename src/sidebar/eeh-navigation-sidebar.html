@@ -12,7 +12,9 @@
             <!-- duplicate the toggle-sidebar-btn -->
             <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
                 <a class="alt-eeh-search-container" ng-if="!sidebarIsCollapsed">
-                    <span ng-click="toggleSidebarTextCollapse()" class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
+                    <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()">
+                        <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
+                    </div>
                     <eeh-navigation-search-input 
                         ng-if="searchInputIsVisible && !sidebarIsCollapsed"
                         class="sidebar-search-input"
@@ -20,7 +22,9 @@
                         submit="searchInputSubmit"
                         is-collapsed="sidebarIsCollapsed">
                     </eeh-navigation-search-input>
-                    <span ng-hide="sidebarIsCollapsed" ng-click="minimizeFn()" class="minimize pull-right" ng-class="returnClass()"></span>
+                    <div class="alt-eeh-span-container" ng-click="minimizeFn()">
+                        <span ng-hide="sidebarIsCollapsed" class="minimize pull-right" ng-class="returnClass()"></span>
+                    </div>
                 </a>
                 <a ng-if="sidebarIsCollapsed" ng-click="toggleSidebarTextCollapse()">
                     <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
