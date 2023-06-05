@@ -5,6 +5,11 @@
 .alt-eeh-search-container {
   display: flex !important;
   justify-content: space-between;
+  align-items: stretch;
+}
+
+.alt-eeh-span-container {
+  display: flex;
   align-items: center;
 }
 
