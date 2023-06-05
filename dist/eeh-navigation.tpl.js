@@ -226,7 +226,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "            </li> -->\n" +
     "            <!-- duplicate the toggle-sidebar-btn -->\n" +
     "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
-    "                <a class=\"alt-eeh-search-container\">\n" +
+    "                <a class=\"alt-eeh-search-container\" ng-if=\"!sidebarIsCollapsed\">\n" +
     "                    <span ng-click=\"toggleSidebarTextCollapse()\" class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
     "                    <eeh-navigation-search-input \n" +
     "                        ng-if=\"searchInputIsVisible && !sidebarIsCollapsed\"\n" +
@@ -236,6 +236,9 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                        is-collapsed=\"sidebarIsCollapsed\">\n" +
     "                    </eeh-navigation-search-input>\n" +
     "                    <span ng-hide=\"sidebarIsCollapsed\" ng-click=\"minimizeFn()\" class=\"minimize pull-right\" ng-class=\"returnClass()\"></span>\n" +
+    "                </a>\n" +
+    "                <a ng-if=\"sidebarIsCollapsed\" ng-click=\"toggleSidebarTextCollapse()\">\n" +
+    "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
     "                </a>\n" +
     "            </li>\n" +
     "            <li ng-repeat=\"item in sidebarMenuItems | orderBy:'weight'\"\n" +
