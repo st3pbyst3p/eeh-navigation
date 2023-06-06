@@ -12,7 +12,7 @@
             <!-- duplicate the toggle-sidebar-btn -->
             <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
                 <a class="alt-eeh-search-container" ng-if="!sidebarIsCollapsed">
-                    <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()">
+                    <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="justify-content: flex-start;">
                         <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
                     </div>
                     <eeh-navigation-search-input 

@@ -6,6 +6,7 @@
   display: flex !important;
   justify-content: space-between;
   align-items: stretch;
+  cursor: unset !important;
 }
 
 .alt-eeh-search-container:hover {
@@ -15,6 +16,13 @@
 .alt-eeh-span-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 50px;
+}
+
+.alt-eeh-span-container:hover {
+  background-color: #e7e7e7;
 }
 
 .eeh-padding {
