@@ -227,7 +227,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "            <!-- duplicate the toggle-sidebar-btn -->\n" +
     "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
     "                <a class=\"alt-eeh-search-container\" ng-if=\"!sidebarIsCollapsed\">\n" +
-    "                    <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"justify-content: flex-start;\">\n" +
+    "                    <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"justify-content: flex-start; flex-shrink: 0; width: 50px; padding-left: 15px;\">\n" +
     "                        <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
     "                    </div>\n" +
     "                    <eeh-navigation-search-input \n" +

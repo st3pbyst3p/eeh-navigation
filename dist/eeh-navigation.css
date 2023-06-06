@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: stretch;
   cursor: unset !important;
+  padding: 0 !important;
 }
 
 .alt-eeh-search-container:hover {
@@ -18,7 +19,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 50px;
 }
 
 .alt-eeh-span-container:hover {
