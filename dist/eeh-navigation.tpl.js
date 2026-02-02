@@ -2,10 +2,8 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
   'use strict';
 
   $templateCache.put('template/eeh-navigation/menu-item-content/eeh-navigation-menu-item-content.html',
-    "<span ng-if=\"menuItem.isIconVisible\"\n" +
-    "      class=\"menu-item-icon icon-fw {{ iconBaseClass() }} {{ menuItem.iconClass}}\"></span>\n" +
-    "<span ng-if=\"menuItem.text\"\n" +
-    "      class=\"menu-item-text\" translate=\"{{ menuItem.text }}\"></span>\n" +
+    "<span ng-if=\"menuItem.isIconVisible\" class=\"menu-item-icon icon-fw {{ iconBaseClass() }} {{ menuItem.iconClass}}\" style=\"flex-grow: 0; flex-shrink: 0;\"></span>\n" +
+    "<span ng-if=\"menuItem.text\" class=\"menu-item-text\" translate=\"{{ menuItem.text }}\"></span>\n" +
     "<span ng-if=\"menuItem._ngBindHtml()\" ng-bind-html=\"menuItem._ngBindHtml()\"></span>\n" +
     "<!-- add/remove to favorites icon -->\n" +
     "<!-- <i class=\"fa fa-star-o pull-right\" style=\"font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(menuItem) && !menuItem.isFavorite && !menuItem.iconClass\" ng-click=\"altManageFavorites(menuItem)\"></i>\n" +
@@ -278,7 +276,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "    <span ng-if=\"item.ngInclude\" ng-include=\"item.ngInclude\"></span>\n" +
     "    <!-- lower lvl sidebar element - link with no children -->\n" +
     "    <a ng-style=\"altCanBeFavorites(item) ? {'width': 'calc(100% - 22px)', 'float': 'left'} : {}\" ng-if=\"item.state\" ui-sref=\"{{item.state}}\"  ui-sref-opts=\"{inherit: false}\">\n" +
-    "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +
+    "        <span eeh-navigation-menu-item-content=\"item\" ng-style=\"altCanBeFavorites(item) ? {'width': '100%', 'display': 'flex', 'align-items': 'center'} : {}\"></span>\n" +
     "    </a>\n" +
     "    <a ng-if=\"item.click\" ng-click=\"item.click()\">\n" +
     "        <span eeh-navigation-menu-item-content=\"item\"></span>\n" +

@@ -63,7 +63,7 @@
     <span ng-if="item.ngInclude" ng-include="item.ngInclude"></span>
     <!-- lower lvl sidebar element - link with no children -->
     <a ng-style="altCanBeFavorites(item) ? {'width': 'calc(100% - 22px)', 'float': 'left'} : {}" ng-if="item.state" ui-sref="{{item.state}}"  ui-sref-opts="{inherit: false}">
-        <span eeh-navigation-menu-item-content="item"></span>
+        <span eeh-navigation-menu-item-content="item" ng-style="altCanBeFavorites(item) ? {'width': '100%', 'display': 'flex', 'align-items': 'center'} : {}"></span>
     </a>
     <a ng-if="item.click" ng-click="item.click()">
         <span eeh-navigation-menu-item-content="item"></span>
