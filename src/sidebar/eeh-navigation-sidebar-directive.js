@@ -85,7 +85,7 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 $rootScope.$broadcast("menuStateChanged", scope.sidebarIsCollapsed);
                     
                 // if collapsed, collapses side-panel after press + sets class to active element
-                if(scope.sidebarIsCollapsed) {
+                if(scope.sidebarIsCollapsed && !elem.hasChildren()) {
                     if(scope.compact) scope.notCollapsed = []; //works only if "compact" is true
                     // $timeout(function() { // needs timeout to set current active element class
                     //     var t = document.getElementsByClassName('leaf active');

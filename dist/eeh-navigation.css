@@ -110,7 +110,7 @@
 
 @media (min-width: 768px) {
   .eeh-navigation-sidebar {
-    z-index: 1;
+    z-index: 999;
     position: absolute;
     width: 275px;
   }
@@ -190,6 +190,7 @@
 .alt-search-container-input {
   border: unset !important;
   box-shadow: unset !important;
+  background: transparent !important;
 }
 
 .eeh-navigation {

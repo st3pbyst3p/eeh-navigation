@@ -434,7 +434,7 @@
                     });
                     elem.activeNod = true;
                     $rootScope.$broadcast("menuStateChanged", scope.sidebarIsCollapsed);
-                    if (scope.sidebarIsCollapsed) {
+                    if (scope.sidebarIsCollapsed && !elem.hasChildren()) {
                         if (scope.compact) scope.notCollapsed = [];
                         angular.forEach(menuItems(), function(menuItem) {
                             if (!menuItem.isCollapsed) scope.notCollapsed.push(menuItem);

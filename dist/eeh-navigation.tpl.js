@@ -321,6 +321,8 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "        <span class=\"menu-item-icon icon-fw fa fa-star pull-right\" style=\"font-size: 15px; color: #c1c1c1; width: unset;\" aria-hidden=\"true\" ng-if=\"altCanBeFavorites(item) && item.isFavorite && item.iconClass\" ng-click=\"altManageFavorites(item)\"></span>\n" +
     "    </div>\n" +
     "    <div style=\"clear: both;\"></div>\n" +
+    "    \n" +
+    "    <!-- collapsed sidebar elements -->\n" +
     "    <!-- checks whether there is a description or not and puts it in the title -->\n" +
     "    <ul ng-if=\"!item.state && item.hasChildren()\" uib-collapse=\"item.isCollapsed\"\n" +
     "        ng-class=\"{ 'text-collapsed': sidebarIsCollapsed }\"\n" +

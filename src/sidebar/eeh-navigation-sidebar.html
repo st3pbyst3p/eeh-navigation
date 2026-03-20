@@ -102,6 +102,8 @@
         <span class="menu-item-icon icon-fw fa fa-star pull-right" style="font-size: 15px; color: #c1c1c1; width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
     </div>
     <div style="clear: both;"></div>
+    
+    <!-- collapsed sidebar elements -->
     <!-- checks whether there is a description or not and puts it in the title -->
     <ul ng-if="!item.state && item.hasChildren()" uib-collapse="item.isCollapsed"
         ng-class="{ 'text-collapsed': sidebarIsCollapsed }"
