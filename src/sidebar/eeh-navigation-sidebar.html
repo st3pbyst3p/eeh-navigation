@@ -12,8 +12,9 @@
             <!-- duplicate the toggle-sidebar-btn -->
             <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
                 <a class="alt-eeh-search-container" ng-if="!sidebarIsCollapsed">
-                    <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="justify-content: flex-start; flex-shrink: 0; width: 50px; padding-left: 15px;">
-                        <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
+                    <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="margin-left: 10px !important;">
+                        <!-- <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span> -->
+                         <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'"></span>
                     </div>
                     <eeh-navigation-search-input 
                         ng-if="searchInputIsVisible && !sidebarIsCollapsed"
@@ -22,13 +23,16 @@
                         submit="searchInputSubmit"
                         is-collapsed="sidebarIsCollapsed">
                     </eeh-navigation-search-input>
-                    <div class="alt-eeh-span-container" ng-click="minimizeFn()">
-                        <span ng-hide="sidebarIsCollapsed" class="minimize pull-right" ng-class="returnClass()"></span>
+                    <div class="alt-eeh-span-container" ng-click="minimizeFn()" style="margin-right: 5px !important;">
+                        <span ng-hide="sidebarIsCollapsed" class="minimize" ng-class="returnClass()"></span>
                     </div>
                 </a>
-                <a ng-if="sidebarIsCollapsed" ng-click="toggleSidebarTextCollapse()">
+                <div ng-if="sidebarIsCollapsed" class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="margin: 16px 0px 16px 10px !important;">
+                    <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'"></span>
+                </div>
+                <!-- <a ng-if="sidebarIsCollapsed" ng-click="toggleSidebarTextCollapse()">
                     <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
-                </a>
+                </a> -->
             </li>
             <li ng-repeat="item in sidebarMenuItems | orderBy:'weight'"
                 ng-attr-id="{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}"
@@ -39,10 +43,11 @@
                 ui-sref-active="active"
                 ng-attr-title="{{item.description ? item.description : item.text | translate}}"
                 eeh-navigation-active-menu-item="item"></li>
-            <li ng-click="toggleSidebarTextCollapse()" ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
-                <a>
-                    <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span>
-                </a>
+            <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
+                <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="margin-left: 10px !important; margin-bottom: 10px !important;">
+                    <!-- <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span> -->
+                        <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'"></span>
+                </div>
             </li>
         </ul>
     </div>

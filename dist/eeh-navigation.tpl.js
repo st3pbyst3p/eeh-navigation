@@ -189,22 +189,28 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "</script>\n" +
     "\n" +
     "<script type=\"text/ng-template\" id=\"template/eeh-navigation/search-input.html\">\n" +
-    "    <form ng-submit=\"submit(model.query)\" class=\"navbar-form\" ng-class=\"classes\">\n" +
-    "        <div class=\"input-group\">\n" +
+    "    <form ng-submit=\"submit(model.query)\" class=\"navbar-form\" ng-class=\"classes\" style=\"padding: 0 8px;\">\n" +
+    "        <div class=\"input-group alt-search-container\">\n" +
+    "            <div>\n" +
+    "                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n" +
+    "            </div>\n" +
+    "            <input type=\"text\" class=\"form-control alt-search-container-input\" placeholder=\"{{'msgr.search' | translate }}\" ng-model=\"model.query\">\n" +
+    "        </div>\n" +
+    "        <!-- <div class=\"input-group\">\n" +
     "            <input type=\"text\"\n" +
     "                   class=\"form-control\"\n" +
-    "                   placeholder=\"{{'Search'|translate}}\"\n" +
+    "                   placeholder=\"{{'msgr.search' | translate }}\"\n" +
     "                   ng-model=\"model.query\">\n" +
-    "        <span class=\"input-group-btn\" ng-if=\"!isCollapsed\">\n" +
-    "            <button class=\"btn btn-default\" ng-disabled=\"!model.query\" ng-click=\"model.query = ''\">\n" +
-    "                <span style=\"margin: 0;\" class=\"glyphicon glyphicon-remove remove-icon {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
-    "            </button>\n" +
-    "            <!-- old -->\n" +
-    "            <!-- <button class=\"btn btn-default\">\n" +
-    "                <span class=\"icon-fw {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
-    "            </button> -->\n" +
-    "        </span>\n" +
-    "        </div>\n" +
+    "            <span class=\"input-group-btn\" ng-if=\"!isCollapsed\">\n" +
+    "                <button class=\"btn btn-default\" ng-disabled=\"!model.query\" ng-click=\"model.query = ''\">\n" +
+    "                    <span style=\"margin: 0;\" class=\"glyphicon glyphicon-remove remove-icon {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
+    "                </button>\n" +
+    "                \n" +
+    "                <button class=\"btn btn-default\">\n" +
+    "                    <span class=\"icon-fw {{ iconBaseClass() }} {{ iconClass }}\"></span>\n" +
+    "                </button>\n" +
+    "            </span>\n" +
+    "        </div> -->\n" +
     "    </form>\n" +
     "</script>\n"
   );
@@ -225,8 +231,9 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "            <!-- duplicate the toggle-sidebar-btn -->\n" +
     "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
     "                <a class=\"alt-eeh-search-container\" ng-if=\"!sidebarIsCollapsed\">\n" +
-    "                    <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"justify-content: flex-start; flex-shrink: 0; width: 50px; padding-left: 15px;\">\n" +
-    "                        <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
+    "                    <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"margin-left: 10px !important;\">\n" +
+    "                        <!-- <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span> -->\n" +
+    "                         <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'\"></span>\n" +
     "                    </div>\n" +
     "                    <eeh-navigation-search-input \n" +
     "                        ng-if=\"searchInputIsVisible && !sidebarIsCollapsed\"\n" +
@@ -235,13 +242,16 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                        submit=\"searchInputSubmit\"\n" +
     "                        is-collapsed=\"sidebarIsCollapsed\">\n" +
     "                    </eeh-navigation-search-input>\n" +
-    "                    <div class=\"alt-eeh-span-container\" ng-click=\"minimizeFn()\">\n" +
-    "                        <span ng-hide=\"sidebarIsCollapsed\" class=\"minimize pull-right\" ng-class=\"returnClass()\"></span>\n" +
+    "                    <div class=\"alt-eeh-span-container\" ng-click=\"minimizeFn()\" style=\"margin-right: 5px !important;\">\n" +
+    "                        <span ng-hide=\"sidebarIsCollapsed\" class=\"minimize\" ng-class=\"returnClass()\"></span>\n" +
     "                    </div>\n" +
     "                </a>\n" +
-    "                <a ng-if=\"sidebarIsCollapsed\" ng-click=\"toggleSidebarTextCollapse()\">\n" +
+    "                <div ng-if=\"sidebarIsCollapsed\" class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"margin: 16px 0px 16px 10px !important;\">\n" +
+    "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'\"></span>\n" +
+    "                </div>\n" +
+    "                <!-- <a ng-if=\"sidebarIsCollapsed\" ng-click=\"toggleSidebarTextCollapse()\">\n" +
     "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
-    "                </a>\n" +
+    "                </a> -->\n" +
     "            </li>\n" +
     "            <li ng-repeat=\"item in sidebarMenuItems | orderBy:'weight'\"\n" +
     "                ng-attr-id=\"{{item.id ? item.id : 'eeh-navigation-sidebar-' + item.menuItemName}}\"\n" +
@@ -252,10 +262,11 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                ui-sref-active=\"active\"\n" +
     "                ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\n" +
     "                eeh-navigation-active-menu-item=\"item\"></li>\n" +
-    "            <li ng-click=\"toggleSidebarTextCollapse()\" ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
-    "                <a>\n" +
-    "                    <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span>\n" +
-    "                </a>\n" +
+    "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
+    "                <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"margin-left: 10px !important; margin-bottom: 10px !important;\">\n" +
+    "                    <!-- <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span> -->\n" +
+    "                        <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'\"></span>\n" +
+    "                </div>\n" +
     "            </li>\n" +
     "        </ul>\n" +
     "    </div>\n" +

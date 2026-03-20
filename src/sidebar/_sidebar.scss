@@ -13,14 +13,21 @@
 }
 
 .alt-eeh-span-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    padding: 13px;
+    border-radius: 9px;
+    background-color: #8ea2bb;
+    color: #fff;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
 }
 
 .alt-eeh-span-container:hover {
-  background-color: #e7e7e7;
+  background-color: #a1b8d4;
 }
 
 .eeh-padding {
@@ -117,6 +124,12 @@
       }
     }
   }
+}
+
+.alt-eeh-span-container span {
+  margin: 0 !important;
+  padding: 0 !important;
+  position: unset !important;
 }
 
 @media(min-width: 768px) {

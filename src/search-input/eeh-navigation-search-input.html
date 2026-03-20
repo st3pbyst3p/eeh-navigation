@@ -17,21 +17,27 @@
 </script>
 
 <script type="text/ng-template" id="template/eeh-navigation/search-input.html">
-    <form ng-submit="submit(model.query)" class="navbar-form" ng-class="classes">
-        <div class="input-group">
+    <form ng-submit="submit(model.query)" class="navbar-form" ng-class="classes" style="padding: 0 8px;">
+        <div class="input-group alt-search-container">
+            <div>
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <input type="text" class="form-control alt-search-container-input" placeholder="{{'msgr.search' | translate }}" ng-model="model.query">
+        </div>
+        <!-- <div class="input-group">
             <input type="text"
                    class="form-control"
-                   placeholder="{{'Search'|translate}}"
+                   placeholder="{{'msgr.search' | translate }}"
                    ng-model="model.query">
-        <span class="input-group-btn" ng-if="!isCollapsed">
-            <button class="btn btn-default" ng-disabled="!model.query" ng-click="model.query = ''">
-                <span style="margin: 0;" class="glyphicon glyphicon-remove remove-icon {{ iconBaseClass() }} {{ iconClass }}"></span>
-            </button>
-            <!-- old -->
-            <!-- <button class="btn btn-default">
-                <span class="icon-fw {{ iconBaseClass() }} {{ iconClass }}"></span>
-            </button> -->
-        </span>
-        </div>
+            <span class="input-group-btn" ng-if="!isCollapsed">
+                <button class="btn btn-default" ng-disabled="!model.query" ng-click="model.query = ''">
+                    <span style="margin: 0;" class="glyphicon glyphicon-remove remove-icon {{ iconBaseClass() }} {{ iconClass }}"></span>
+                </button>
+                
+                <button class="btn btn-default">
+                    <span class="icon-fw {{ iconBaseClass() }} {{ iconClass }}"></span>
+                </button>
+            </span>
+        </div> -->
     </form>
 </script>
