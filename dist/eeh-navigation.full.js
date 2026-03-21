@@ -473,9 +473,9 @@
                 };
                 scope.returnClass = function() {
                     if (scope.minimized) {
-                        return "fa fa-plus";
+                        return "glyphicon glyphicon-option-horizontal";
                     } else {
-                        return "fa fa-minus";
+                        return "glyphicon glyphicon-option-vertical";
                     }
                 };
                 scope.iconBaseClass = function() {

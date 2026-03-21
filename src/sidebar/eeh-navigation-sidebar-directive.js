@@ -143,10 +143,10 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                 }
             };
             scope.returnClass = function() { // returns different icons whether the menu is expanded or not
-                // "glyphicon glyphicon-option-horizontal"
-                // "glyphicon glyphicon-option-vertical"
-                if(scope.minimized) { return "fa fa-plus"; }
-                    else { return "fa fa-minus"; }
+                // "glyphicon glyphicon-option-horizontal" fa fa-plus
+                // "glyphicon glyphicon-option-vertical" fa fa-minus
+                if(scope.minimized) { return "glyphicon glyphicon-option-horizontal"; }
+                    else { return "glyphicon glyphicon-option-vertical"; }
             };
 
             // -----------------------------------------------------------------------------------------
