@@ -194,7 +194,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "            <div>\n" +
     "                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n" +
     "            </div>\n" +
-    "            <input type=\"text\" class=\"form-control alt-search-container-input\" placeholder=\"{{'msgr.search' | translate }}\" ng-model=\"model.query\">\n" +
+    "            <input type=\"text\" name=\"eeh-navigation-search-input\" class=\"form-control alt-search-container-input\" placeholder=\"{{'msgr.search' | translate }}\" ng-model=\"model.query\">\n" +
     "        </div>\n" +
     "        <!-- <div class=\"input-group\">\n" +
     "            <input type=\"text\"\n" +
