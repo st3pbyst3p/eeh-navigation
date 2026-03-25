@@ -180,7 +180,6 @@
 .alt-search-container {
   display: flex !important;
   align-items: center;
-  gap: 3px;
   padding: 0 10px;
   border: 1px solid #8ea2bb;
   border-radius: 6px;

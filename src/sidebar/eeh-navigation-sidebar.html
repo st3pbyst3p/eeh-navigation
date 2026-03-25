@@ -44,7 +44,7 @@
                 ng-attr-title="{{item.description ? item.description : item.text | translate}}"
                 eeh-navigation-active-menu-item="item"></li>
             <li ng-if="sidebarCollapsedButtonIsVisible && isSidebarVisible()">
-                <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="margin-left: 10px !important; margin-bottom: 10px !important;">
+                <div class="alt-eeh-span-container" ng-click="toggleSidebarTextCollapse()" style="margin: 10px 0px 10px 10px !important;">
                     <!-- <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass"></span> -->
                         <span class="icon-fw {{ iconBaseClass() }}" ng-class="sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'"></span>
                 </div>

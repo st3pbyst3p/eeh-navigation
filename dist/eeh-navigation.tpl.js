@@ -263,7 +263,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                ng-attr-title=\"{{item.description ? item.description : item.text | translate}}\"\n" +
     "                eeh-navigation-active-menu-item=\"item\"></li>\n" +
     "            <li ng-if=\"sidebarCollapsedButtonIsVisible && isSidebarVisible()\">\n" +
-    "                <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"margin-left: 10px !important; margin-bottom: 10px !important;\">\n" +
+    "                <div class=\"alt-eeh-span-container\" ng-click=\"toggleSidebarTextCollapse()\" style=\"margin: 10px 0px 10px 10px !important;\">\n" +
     "                    <!-- <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? sidebarCollapsedIconClass : sidebarExpandedIconClass\"></span> -->\n" +
     "                        <span class=\"icon-fw {{ iconBaseClass() }}\" ng-class=\"sidebarIsCollapsed ? 'fa fa-chevron-right' : 'fa fa-chevron-left'\"></span>\n" +
     "                </div>\n" +
