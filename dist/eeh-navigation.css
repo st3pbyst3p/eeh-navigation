@@ -17,19 +17,24 @@
 .alt-eeh-span-container {
   padding: 13px;
   border-radius: 6px;
-  background-color: #8ea2bb;
-  color: #fff;
+  background-color: #fff;
+  border: 1px solid #b8b8b8;
+  color: #8ea2bb;
   margin: 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  transition: all 0.3 ease-in-out;
 }
 
 .alt-eeh-span-container:hover {
-  background-color: #a1b8d4;
+  background: #a1b8d4;
+  border: 1px solid #a1b8d4;
+  color: #f8f8f8;
+  transition: all 0.3 ease-in-out;
 }
 
 .eeh-padding {
@@ -181,9 +186,10 @@
   display: flex !important;
   align-items: center;
   padding: 0 10px;
-  border: 1px solid #8ea2bb;
+  border: 1px solid #b8b8b8;
   border-radius: 6px;
   color: #8ea2bb;
+  height: 30px;
 }
 
 .alt-search-container-input {
