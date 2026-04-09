@@ -24,17 +24,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .alt-eeh-span-container:hover {
   background: #a1b8d4;
   border: 1px solid #a1b8d4;
   color: #f8f8f8;
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .eeh-padding {
@@ -189,7 +189,7 @@
   border: 1px solid #b8b8b8;
   border-radius: 6px;
   color: #8ea2bb;
-  height: 30px;
+  height: 28px;
 }
 
 .alt-search-container-input {
