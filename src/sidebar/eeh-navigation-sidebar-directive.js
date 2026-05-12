@@ -149,6 +149,11 @@ function SidebarDirective($window, eehNavigation, $filter, $rootScope, $timeout)
                     else { return "glyphicon glyphicon-option-vertical"; }
             };
 
+            // search input ngModel
+            scope.searchInput = {
+                'query': ''
+            };
+
             // -----------------------------------------------------------------------------------------
 
             scope.iconBaseClass = function () {

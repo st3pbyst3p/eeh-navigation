@@ -240,6 +240,7 @@ angular.module('eehNavigation').run(['$templateCache', function($templateCache) 
     "                        class=\"sidebar-search-input\"\n" +
     "                        icon-class=\"searchInputIconClass\"\n" +
     "                        submit=\"searchInputSubmit\"\n" +
+    "                        model=\"searchInput\"\n" +
     "                        is-collapsed=\"sidebarIsCollapsed\">\n" +
     "                    </eeh-navigation-search-input>\n" +
     "                    <div class=\"alt-eeh-span-container\" ng-click=\"minimizeFn()\" style=\"margin-right: 5px !important;\">\n" +

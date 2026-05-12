@@ -11,12 +11,13 @@ function SearchInputDirective(eehNavigation, $timeout) {
             iconClass: '=',
             submit: '=',
             classes: '=',
-            isCollapsed: '='
+            isCollapsed: '=',
+            model: '='
         },
         link: function (scope) {
-            scope.model = {
-                query: ''
-            };
+            // scope.model = {
+            //     query: ''
+            // };
             scope.iconBaseClass = function () {
                 return eehNavigation.iconBaseClass();
             };

@@ -367,12 +367,10 @@
                 iconClass: "=",
                 submit: "=",
                 classes: "=",
-                isCollapsed: "="
+                isCollapsed: "=",
+                model: "="
             },
             link: function(scope) {
-                scope.model = {
-                    query: ""
-                };
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
                 };
@@ -477,6 +475,9 @@
                     } else {
                         return "glyphicon glyphicon-option-vertical";
                     }
+                };
+                scope.searchInput = {
+                    query: ""
                 };
                 scope.iconBaseClass = function() {
                     return eehNavigation.iconBaseClass();
