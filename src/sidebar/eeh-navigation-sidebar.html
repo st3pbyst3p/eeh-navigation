@@ -97,10 +97,10 @@
             justify-content: end; cursor: pointer;"
         ng-style="item.iconClass ? {'height': '43px'} : {'height': '33px'}"
     >
-        <i class="fa fa-star-o pull-right" style="font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;" aria-hidden="true" ng-if="altCanBeFavorites(item) && !item.isFavorite && !item.iconClass" ng-click="altManageFavorites(item)"></i>
-        <i class="fa fa-star pull-right" style="font-size: 15px; margin-right: 5px; width: 1.28571429em; text-align: center; color: #c1c1c1;" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && !item.iconClass" ng-click="altManageFavorites(item)"></i>
-        <span class="menu-item-icon icon-fw fa fa-star-o pull-right" style="font-size: 15px; color: #c1c1c1; width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && !item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
-        <span class="menu-item-icon icon-fw fa fa-star pull-right" style="font-size: 15px; color: #c1c1c1; width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
+        <i class="fa fa-star-o alt-menu-fav-star pull-right" aria-hidden="true" ng-if="altCanBeFavorites(item) && !item.isFavorite && !item.iconClass" ng-click="altManageFavorites(item)"></i>
+        <i class="fa fa-star alt-menu-fav-star alt-menu-fav-star-selected pull-right" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && !item.iconClass" ng-click="altManageFavorites(item)"></i>
+        <span class="menu-item-icon icon-fw fa fa-star-o alt-menu-fav-star pull-right" style="width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && !item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
+        <span class="menu-item-icon icon-fw fa fa-star alt-menu-fav-star alt-menu-fav-star-selected pull-right" style="width: unset;" aria-hidden="true" ng-if="altCanBeFavorites(item) && item.isFavorite && item.iconClass" ng-click="altManageFavorites(item)"></span>
     </div>
     <div style="clear: both;"></div>
     

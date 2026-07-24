@@ -35,6 +35,18 @@
   color: #f8f8f8;
 }
 
+.alt-menu-fav-star {
+  font-size: 16px;
+  margin-right: 5px;
+  width: 1.28571429em;
+  text-align: center;
+  color: #c1c1c1;
+}
+
+.alt-menu-fav-star-selected {
+  color: #c1c1c1 !important;
+}
+
 .eeh-padding {
   padding-right: 0;
   padding-left: 0;
